@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import QuantityInput from "../components/QuantityInput";
-import SweetAlert2 from "../components/utilsComponents/sweetAlert2";
 
 
 import "../styles/Product.css";
@@ -11,7 +10,6 @@ function Product() {
   const dispatch = useDispatch();
   const params = useParams();
   const [product, setProduct] = useState({});
-  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,16 +24,8 @@ function Product() {
     getProduct();
   }, []);
 
-  const handleClick = () => {
-    dispatch({
-      type: "ADD_ITEM_CART",
-      payload: product,
-    });
-    setTimeout(()=>{
-      setShowAlert(false);
-    }, 1500 );
-    setShowAlert(true);
-  };
+  const handleClick = ()=>{}
+
 
   return (
     <div className="container">

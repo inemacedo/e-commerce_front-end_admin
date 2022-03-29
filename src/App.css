@@ -1,0 +1,12 @@
+
+html {
+  scroll-behavior: smooth;
+}
+
+a, a.link {
+  text-decoration: none;
+}
+
+.scroll-to-top {
+  cursor: pointer;
+}

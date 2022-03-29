@@ -1,39 +1,30 @@
 import React, { useEffect, useState } from "react";
-import ProductsList from "../components/ProductsList";
-import Header from "../components/Header";
-import "../styles/Home.css";
+
+import ContentRow from "../components/ContentRow";
+import Row2 from "../components/Row2";
+import Row3 from "../components/Row3";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    console.log("useEffect", process.env.REACT_APP_API_URL);
-    const getProducts = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/products?featured=true`
-      );
-      const data = await response.json();
-      console.log(data);
-      setProducts(data);
-    };
-    getProducts();
-  }, []);
 
   return (
-    <div className="home">
-      <Header />
-      <h2 className="fs-4 text-center mb-5 fw-bold"> DESTACADOS</h2>
-      <ProductsList products={products} />
-      <div className="text-center">
-        <Link
-          to="/productos"
-          className="btn btn-dark rounded-pill py-2 px-5 mt-5 fw-bold button-home"
-        >
-          Ver Todos
-        </Link>
+    <div className="container-fluid">
+
+      {/* <!-- Page Heading --> */}
+      <div className="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
+        <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+          <i className="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
       </div>
+
+      {/* <!-- Content Row --> */}
+      <ContentRow />
+      <Row2 />
+      <Row3 />
+
     </div>
+
   );
 }
 
