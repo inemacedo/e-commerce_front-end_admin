@@ -33,7 +33,7 @@ function CreateProduct() {
         title: data.title,
         description: data.description,
         price: data.price,
-        material:data.material
+        material: data.material,
         measures: data.measures,
         style: data.style,
         environment: data.environment,
