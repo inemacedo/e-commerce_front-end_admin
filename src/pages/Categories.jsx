@@ -1,34 +1,40 @@
-
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import CreateItem from "../pages/CreateItem";
 
-async function fetchData({url,method,body}){
+import { useForm } from "react-hook-form";
+
+async function fetchData({url,method,token}){
   const response = await fetch(
     url, {
       method: method,
-      body: JSON.stringify(body),
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer "+token,
+      }
     }
   );
   const data = await response.json();
   return data;
 }
 
-function ShowProducts() {
+function ShowCategories() {
 
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const user = useSelector(state=>state.user);
 
   useEffect( ()=>{
-    const getProducts = async ()=>{
+    const getAdmins = async ()=>{
       const data = await fetchData({
-        url: process.env.REACT_APP_API_URL+"/products",
+        url: process.env.REACT_APP_API_URL+"/categories",
         method: "GET",
+        token: user.token,
       });
       console.log(data);
-      setProducts(data);
+      setCategories(data);
     }
-    getProducts();
+    getAdmins();
 
   } , [] );
 
@@ -37,7 +43,10 @@ function ShowProducts() {
   return (
     <div className="container-fluid">
 
-      <h1 className="h3 mb-2 text-gray-800">Products</h1>
+<div className="d-flex align-items-start justify-content-between my-4" >
+        <h1 className="h3 mb-2 text-gray-800">Categories</h1>
+        <Link className="btn btn-primary" to="/categories/new" >Crear nueva Categoria</Link>
+      </div>
       <p className="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
         For more information about DataTables.</p>
 
@@ -53,10 +62,8 @@ function ShowProducts() {
                 <tr>
                   <th>id</th>
                   <th>Name</th>
-                  <th>Price(USD)</th>
-                  <th>Category</th>
-                  <th>Description</th>
-                  <th>Start date</th>
+                  <th>Slug</th>
+                  <th>Created At</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -64,29 +71,23 @@ function ShowProducts() {
                 <tr>
                   <th>id</th>
                   <th>Name</th>
-                  <th>Price(USD)</th>
-                  <th>Category</th>
-                  <th>Description</th>
-                  <th>Start date</th>
+                  <th>Slug</th>
+                  <th>Created At</th>
                   <th>Actions</th>
                 </tr>
               </tfoot>
               <tbody>
-                {products.map( item=><tr key={item.id} >
-                  <td>{item.id}</td>
-                  <td>{item.title}</td>
-                  <td>{item.price}</td>
-                  <td>{item.categoryId}</td>
-                  <td>
-                    <span className="product-description" >{item.description}</span>
-                  </td>
-                  <td>{item.createdAt}</td>
+                { categories.map(user=><tr key={user.id} >
+                  <td>{user.id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.slug}</td>
+                  <td>{user.createdAt}</td>
                   <td>
                     <button className="btn btn-sm btn-danger btn-circle" >
                       <i className="fas fa-trash"></i>
                     </button>
                   </td>
-                </tr> )}
+                </tr>) }
               </tbody>
             </table>
           </div>
@@ -97,30 +98,34 @@ function ShowProducts() {
   );
 }
 
+function Categories(params) {
 
-function Products(params) {
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => {
+    console.log(data)
+  };
 
   return <div>
     <Routes>
-      <Route path="/" element={<ShowProducts />} />
+      <Route path="/" element={<ShowCategories />} />
       <Route path="/new" element={<CreateItem>
-        <form action="" onSubmit={(ev)=>ev.preventDefault()} >
+        <form action="" onSubmit={handleSubmit(onSubmit)} >
           <div className="row">
             <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">Firstname</label>
-              <input className="form-control form-control-lg" type="text" />
+              <label className="mt-2 mb-0" htmlFor="">Name</label>
+              <input className="form-control form-control-lg" type="text" placeholder="Ingresa un nombre..." defaultValue="" {...register("categoryName")}  />
             </div>
             <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">Lastname</label>
-              <input className="form-control form-control-lg" type="text" />
+              <label className="mt-2 mb-0" htmlFor="">Slug</label>
+              <input className="form-control form-control-lg" type="text" placeholder="Ingresa un slug..." defaultValue="" {...register("slug")}/>
             </div>
             <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">Email</label>
-              <input className="form-control form-control-lg" type="email" />
+              <label className="mt-2 mb-0" htmlFor="">Image</label>
+              <input className="form-control form-control-lg" type="email" placeholder="Ingresa una url..." defaultValue="" {...register("imgUrl")}/>
             </div>
             <div className="col-md-12 col-lg-6">
               <label className="mt-2 mb-0" htmlFor="">Password</label>
-              <input className="form-control form-control-lg" type="password" />
+              <input className="form-control form-control-lg" type="password" placeholder="Ingresa una contraseña..." defaultValue="" {...register("password")}/>
             </div>
           </div>
           <button className="btn btn-primary btn-icon-split mt-4" type="submit" >
@@ -136,5 +141,4 @@ function Products(params) {
   
 }
 
-
-export default Products;
+export default Categories;

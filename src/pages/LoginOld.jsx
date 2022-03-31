@@ -13,7 +13,7 @@ async function fetchData({url,method,body}){
     }
   );
   const data = await response.json();
-  return { status: response.status, data };
+  return data;
 }
 
 function Login() {
@@ -22,22 +22,19 @@ function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showError, setShowError] = useState(false);
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    const response = await fetchData({
+    const data = await fetchData({
       url: `${process.env.REACT_APP_API_URL}/tokens`,
       method: "POST",
       body: { email, password }
     });
-    console.log(response);
-    if(response.status !== 200){
-      setShowError(true);
-    }else dispatch({type: "LOGIN", payload: response.data});
+    console.log(data);
+    dispatch({type: "LOGIN", payload: data});
   }
 
-  return user.token ? <Navigate to="/profile" /> : (
+  return user.length !== 0 ? <Navigate to="/profile" /> : (
     <div style={{ width: "30rem" }} className="container mt-5">
       <div className="d-flex justify-content-between">
         <h1 className="mt-4 fs-4 fw-bold">Bienvenido!</h1>
@@ -75,34 +72,33 @@ function Login() {
         <button type="submit" className="btn btn-dark mb-4 w-100 text-center">
           Iniciar sesión
         </button>
-      </form>
-      {/* Register buttons */}
-      <div className="text-center">
-        <Link className="text-muted" to="/register">
-          No estás registrado? Click aquí para crear cuenta
-        </Link>
+        {/* Register buttons */}
+        <div className="text-center">
+          <Link className="text-muted" to="/register">
+            No estás registrado? Click aquí para crear cuenta
+          </Link>
 
-        <p>o inicia sesión con:</p>
-        <button
-          type="button"
-          className="btn btn-secondary btn-floating rounded-circle mx-1"
-        >
-          <BsFacebook size={20} />
-        </button>
-        <button
-          type="button"
-          className="btn btn-secondary btn-floating rounded-circle mx-1"
-        >
-          <BsGoogle size={20} />
-        </button>
-        <button
-          type="button"
-          className="btn btn-secondary btn-floating rounded-circle mx-1"
-        >
-          <BsTwitter size={20} />
-        </button>
-      </div>
-      { showError && <p className="alert alert-danger text-center my-5" >Ingresa tus credenciales correctamente</p> }
+          <p>o inicia sesión con:</p>
+          <button
+            type="button"
+            className="btn btn-secondary btn-floating rounded-circle mx-1"
+          >
+            <BsFacebook size={20} />
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-floating rounded-circle mx-1"
+          >
+            <BsGoogle size={20} />
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-floating rounded-circle mx-1"
+          >
+            <BsTwitter size={20} />
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

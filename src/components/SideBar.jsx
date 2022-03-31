@@ -1,8 +1,11 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 function SideBar() {
+
+    const { pathname } = useLocation();
+    console.log(pathname);
   
   // Sidebar
 
@@ -21,8 +24,8 @@ function SideBar() {
         <hr className="sidebar-divider my-0" />
 
         {/*Nav Item - Dashboard*/}
-        <li className="nav-item active">
-            <Link className="nav-link" to="index">
+        <li className={`nav-item ${pathname==="/"?"active":""}`} >
+            <Link className="nav-link" to="/">
                 <i className="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></Link>
         </li>
@@ -36,7 +39,7 @@ function SideBar() {
         </div>
 
         {/*Nav Item - Pages Collapse Menu*/}
-        <li className="nav-item">
+        <li className={`nav-item ${pathname==="/components"?"active":""}`} >
             <Link className="nav-link collapsed" to="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i className="fas fa-fw fa-cog"></i>
@@ -52,7 +55,7 @@ function SideBar() {
         </li>
 
         {/*Nav Item - Utilities Collapse Menu*/}
-        <li className="nav-item">
+        <li className={`nav-item ${pathname==="/utilities"?"active":""}`} >
             <Link className="nav-link collapsed" to="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
                 <i className="fas fa-fw fa-wrench"></i>
@@ -79,7 +82,7 @@ function SideBar() {
         </div>
 
         {/*Nav Item - Pages Collapse Menu*/}
-        <li className="nav-item">
+        <li className={`nav-item ${pathname==="/pages"?"active":""}`} >
             <Link className="nav-link collapsed" to="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
                 <i className="fas fa-fw fa-folder"></i>
@@ -99,18 +102,32 @@ function SideBar() {
             </div>
         </li>
 
-        {/*Nav Item - Charts*/}
-        <li className="nav-item">
-            <Link className="nav-link" to="charts">
-                <i className="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></Link>
+        {/*Nav Item - Admin CRUD*/}
+        <li className={`nav-item ${pathname==="/admins"||pathname==="/admins/new"?"active":""}`} >
+            <Link className="nav-link" to="/admins">
+                <i className="fas fa-fw fa-wrench"></i>
+                <span>Admins</span></Link>
         </li>
 
-        {/*Nav Item - Tables*/}
-        <li className="nav-item">
-            <Link className="nav-link" to="tables">
+        {/*Nav Item - Categories*/}
+        <li className={`nav-item ${pathname==="/categories"||pathname==="/categories/new"?"active":""}`} >
+            <Link className="nav-link" to="/categories">
                 <i className="fas fa-fw fa-table"></i>
-                <span>Tables</span></Link>
+                <span>Categories</span></Link>
+        </li>
+
+        {/*Nav Item - Products*/}
+        <li className={`nav-item ${pathname==="/products"?"active":""}`} >
+            <Link className="nav-link" to="/products">
+                <i className="fas fa-fw fa-chart-area"></i>
+                <span>Products</span></Link>
+        </li>
+
+        {/*Nav Item - Users*/}
+        <li className={`nav-item ${pathname==="/users"?"active":""}`} >
+            <Link className="nav-link" to="/users">
+                <i className="fas fa-fw fa-table"></i>
+                <span>Users</span></Link>
         </li>
 
         {/*Divider*/}

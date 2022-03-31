@@ -1,34 +1,42 @@
 
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import CreateItem from "../pages/CreateItem";
 
-async function fetchData({url,method,body}){
+
+async function fetchData({url,method,token}){
   const response = await fetch(
     url, {
       method: method,
-      body: JSON.stringify(body),
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer "+token
+      }
     }
   );
   const data = await response.json();
   return data;
 }
 
-function ShowProducts() {
+{/* <CreateItem /> */}
 
-  const [products, setProducts] = useState([]);
+function ShowAdmins() {
+
+  const user = useSelector(state=>state.user);
+  const [admins, setAdmins] = useState([]);
 
   useEffect( ()=>{
-    const getProducts = async ()=>{
+    const getAdmins = async ()=>{
       const data = await fetchData({
-        url: process.env.REACT_APP_API_URL+"/products",
+        url: process.env.REACT_APP_API_URL+"/admins",
         method: "GET",
+        token: user.token,
       });
       console.log(data);
-      setProducts(data);
+      setAdmins(data);
     }
-    getProducts();
+    getAdmins();
 
   } , [] );
 
@@ -37,9 +45,13 @@ function ShowProducts() {
   return (
     <div className="container-fluid">
 
-      <h1 className="h3 mb-2 text-gray-800">Products</h1>
+      <div className="d-flex align-items-start justify-content-between my-4" >
+        <h1 className="h3 mb-2 text-gray-800">Admins</h1>
+        <Link className="btn btn-primary" to="/admins/new" >Crear nuevo Admin</Link>
+      </div>
       <p className="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
         For more information about DataTables.</p>
+
 
       {/* <!-- DataTales Example --> */}
       <div className="card shadow mb-4">
@@ -51,36 +63,25 @@ function ShowProducts() {
             <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
               <thead>
                 <tr>
-                  <th>id</th>
-                  <th>Name</th>
-                  <th>Price(USD)</th>
-                  <th>Category</th>
-                  <th>Description</th>
-                  <th>Start date</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Email</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>id</th>
-                  <th>Name</th>
-                  <th>Price(USD)</th>
-                  <th>Category</th>
-                  <th>Description</th>
-                  <th>Start date</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Email</th>
                   <th>Actions</th>
                 </tr>
               </tfoot>
               <tbody>
-                {products.map( item=><tr key={item.id} >
-                  <td>{item.id}</td>
-                  <td>{item.title}</td>
-                  <td>{item.price}</td>
-                  <td>{item.categoryId}</td>
-                  <td>
-                    <span className="product-description" >{item.description}</span>
-                  </td>
-                  <td>{item.createdAt}</td>
+                {admins.map( item=><tr key={1} >
+                  <td>{item.firstname}</td>
+                  <td>{item.lastname}</td>
+                  <td>{item.email}</td>
                   <td>
                     <button className="btn btn-sm btn-danger btn-circle" >
                       <i className="fas fa-trash"></i>
@@ -98,11 +99,11 @@ function ShowProducts() {
 }
 
 
-function Products(params) {
+function Admins(params) {
 
   return <div>
     <Routes>
-      <Route path="/" element={<ShowProducts />} />
+      <Route path="/" element={<ShowAdmins />} />
       <Route path="/new" element={<CreateItem>
         <form action="" onSubmit={(ev)=>ev.preventDefault()} >
           <div className="row">
@@ -136,5 +137,4 @@ function Products(params) {
   
 }
 
-
-export default Products;
+export default Admins;
