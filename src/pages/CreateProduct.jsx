@@ -29,21 +29,7 @@ function CreateProduct() {
       url: process.env.REACT_APP_API_URL + "/products",
       method: "POST",
       token: user.token,
-      body: {
-        title: data.title,
-        description: data.description,
-        price: data.price,
-        material: data.material,
-        measures: data.measures,
-        style: data.style,
-        environment: data.environment,
-        stock: data.stock,
-        featured: data.featured,
-        image: data.image,
-        imagemeasures: data.imagemeasures,
-        imageenvironment: data.imageenvironment,
-        category: data.category,
-      },
+      body: data,
     });
     console.log(data);
   }; // your form submit function which will invoke after successful validation

@@ -18,7 +18,7 @@ function Products() {
   useEffect(() => {
     const getProducts = async () => {
       const data = await fetchData({
-        url: process.env.REACT_APP_API_URL + "/products",
+        url: process.env.REACT_APP_API_URL + "/products?limit=100",
         method: "GET",
       });
       console.log(data);
