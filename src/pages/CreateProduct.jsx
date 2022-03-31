@@ -33,6 +33,7 @@ function CreateProduct() {
         title: data.title,
         description: data.description,
         price: data.price,
+        material:data.material
         measures: data.measures,
         style: data.style,
         environment: data.environment,
@@ -59,10 +60,9 @@ function CreateProduct() {
                 Título
               </label>
               <input
-                defaultValue="test"
-                {...register("title")}
                 className="form-control form-control-lg"
                 type="text"
+                defaultValue=""
                 {...register("title", { required: true })}
               />
             </div>
@@ -93,7 +93,17 @@ function CreateProduct() {
               <input
                 className="form-control form-control-lg"
                 type="measures"
-                {...register("description")}
+                {...register("measures")}
+              />
+            </div>
+            <div className="col-md-12 col-lg-6">
+              <label className="mt-2 mb-0" htmlFor="">
+                Material
+              </label>
+              <input
+                className="form-control form-control-lg"
+                type="text"
+                {...register("material")}
               />
             </div>
             <div className="col-md-12 col-lg-6">
@@ -167,19 +177,6 @@ function CreateProduct() {
                 type="text"
                 {...register("imagemeasures")}
               />
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Categoría
-              </label>
-              <select
-                className="form-control form-control-lg"
-                {...register("categoryId")}
-              >
-                <option value="1">Mesas</option>
-                <option value="2">Sillas</option>
-                <option value="3">Sillones</option>
-              </select>
             </div>
           </div>
           <button className="btn btn-primary btn-icon-split mt-4" type="submit">
