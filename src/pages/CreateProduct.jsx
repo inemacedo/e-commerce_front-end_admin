@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import CreateItem from "./CreateItem";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
@@ -37,142 +36,166 @@ function CreateProduct() {
   console.log(watch("featured", "categoryId")); // you can watch individual input by pass the name of the input
 
   return (
-    <div>
-      <CreateItem>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="row">
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Título
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="text"
-                defaultValue=""
-                {...register("title", { required: true })}
-              />
+    <div className="container-fluid">
+      <div className="d-flex align-items-start justify-content-between my-4">
+        <h1 className="h3 mb-2 text-gray-800">Nuevo Producto</h1>
+        <Link className="btn btn-dark" to="/categories">
+          Volver
+        </Link>
+      </div>
+      <div className="card shadow mb-4">
+        <div className="card-header py-3">
+          <h6 className="m-0 font-weight-bold text-primary">Detalles</h6>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="row">
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Título
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  defaultValue=""
+                  {...register("title", {
+                    required: "Este campo es obligatorio",
+                  })}
+                />
+                {errors.title && (
+                  <p className="text-warning">{errors.title.message}</p>
+                )}
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Descripción
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  {...register("description")}
+                />
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Precio
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="number"
+                  {...register("price", {
+                    required: "Este campo es obligatorio",
+                  })}
+                />
+                {errors.price && (
+                  <p className="text-warning">{errors.price.message}</p>
+                )}
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Medidas
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="measures"
+                  {...register("measures")}
+                />
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Material
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  {...register("material")}
+                />
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Estilo
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  {...register("style")}
+                />
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Ambiente
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  {...register("environment")}
+                />
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Stock
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="number"
+                  {...register("stock")}
+                />
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Destacado
+                </label>
+                <select
+                  className="form-control form-control-lg"
+                  {...register("featured")}
+                >
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Imagen Principal
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  {...register("image")}
+                />
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Imagen Ambiente
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  {...register("imageenvironment")}
+                />
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Imagen Medidas
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  {...register("imagemeasures")}
+                />
+              </div>
             </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Descripción
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="text"
-                {...register("description")}
-              />
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Precio
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="number"
-                {...register("price", { required: true })}
-              />
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Medidas
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="measures"
-                {...register("measures")}
-              />
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Material
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="text"
-                {...register("material")}
-              />
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Estilo
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="text"
-                {...register("style")}
-              />
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Ambiente
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="text"
-                {...register("environment")}
-              />
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Stock
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="number"
-                {...register("stock")}
-              />
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Destacado
-              </label>
-              <select
-                className="form-control form-control-lg"
-                {...register("featured")}
-              >
-                <option value="true">Si</option>
-                <option value="false">No</option>
-              </select>
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Imagen Principal
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="text"
-                {...register("image")}
-              />
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Imagen Ambiente
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="text"
-                {...register("imageenvironment")}
-              />
-            </div>
-            <div className="col-md-12 col-lg-6">
-              <label className="mt-2 mb-0" htmlFor="">
-                Imagen Medidas
-              </label>
-              <input
-                className="form-control form-control-lg"
-                type="text"
-                {...register("imagemeasures")}
-              />
-            </div>
-          </div>
-          <button className="btn btn-primary btn-icon-split mt-4" type="submit">
-            <span className="icon text-white-50">
-              <i className="fas fa-check"></i>
-            </span>
-            <span className="text">Create</span>
-          </button>
-        </form>
-      </CreateItem>
+            <button
+              className="btn btn-primary btn-icon-split mt-4"
+              type="submit"
+            >
+              <span className="icon text-white-50">
+                <i className="fas fa-check"></i>
+              </span>
+              <span className="text">Create</span>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

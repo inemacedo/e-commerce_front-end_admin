@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
-import CreateItem from "../pages/CreateItem";
+import { Link } from "react-router-dom";
+import DeleteButton from "../components/DeleteButton";
 
 async function fetchData({ url, method, body }) {
   const response = await fetch(url, {
@@ -93,9 +93,7 @@ function Products() {
                     </td>
                     <td>{item.createdAt}</td>
                     <td>
-                      <button className="btn btn-sm btn-danger btn-circle">
-                        <i className="fas fa-trash"></i>
-                      </button>
+                      <DeleteButton itemId={item.id} />
                     </td>
                   </tr>
                 ))}
