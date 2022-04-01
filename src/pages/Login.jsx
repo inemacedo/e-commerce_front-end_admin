@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { BsGoogle, BsFacebook, BsTwitter } from "react-icons/bs";
-import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 
-async function fetchData({url,method,body}){
+
+async function fetchData({ url, method, body }) {
   const response = await fetch(
     url, {
-      method: method,
-      body: JSON.stringify(body),
-      headers: { 'Content-Type': 'application/json' }
-    }
+    method: method,
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' }
+  }
   );
   const data = await response.json();
   return { status: response.status, data };
@@ -18,91 +18,82 @@ async function fetchData({url,method,body}){
 
 function Login() {
 
-  const user = useSelector(state=>state.user);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
   const [showError, setShowError] = useState(false);
 
-  const handleSubmit = async (ev) => {
-    ev.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
     const response = await fetchData({
-      url: `${process.env.REACT_APP_API_URL}/tokens`,
+      url: `${process.env.REACT_APP_API_URL}/tokens/admins`,
       method: "POST",
-      body: { email, password }
+      body: data
     });
-    console.log(response);
-    if(response.status !== 200){
+    if (response.status !== 200) {
       setShowError(true);
-    }else dispatch({type: "LOGIN", payload: response.data});
+    } else dispatch({ type: "LOGIN", payload: response.data });
   }
 
-  return user.token ? <Navigate to="/profile" /> : (
-    <div style={{ width: "30rem" }} className="container mt-5">
-      <div className="d-flex justify-content-between">
-        <h1 className="mt-4 fs-4 fw-bold">Bienvenido!</h1>
-        <Link to="/">
-          <IoMdCloseCircleOutline
-            style={{ color: "#353333" }}
-            className="mt-4"
-            size={20}
-          />
-        </Link>
-      </div>
+  return user.token ? <Navigate to="/" /> : (
+    <div className="container mt-">
 
-      <form
-        className="d-flex flex-column align-items-center"
-        action="#"
-        onSubmit={handleSubmit}
-      >
-        {/* Email input */}
-        <div className="mt-5 form-outline mb-4 w-100">
-          <input type="email" id="email" className="form-control" value={email} onChange={(ev)=>setEmail(ev.target.value)} />
-          <label className="form-label" htmlFor="email">
-            Email
-          </label>
+      {/* <!-- Outer Row --> */}
+      <div className="row justify-content-center">
+
+        <div className="col-xl-10 col-lg-12 col-md-9">
+
+          <div className="card o-hidden border-0 shadow-lg my-5">
+            <div className="card-body p-0">
+              {/* <!-- Nested Row within Card Body --> */}
+              <div className="row">
+                <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                <div className="col-lg-6">
+                  <div className="p-5">
+                    <div className="text-center">
+                      <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    </div>
+                    <form className="user" onSubmit={handleSubmit(onSubmit)} >
+                      <div className="form-group">
+                        <input type="email" className={`form-control form-control-user ${showError?"border-danger":""}`}
+                          id="inputEmail" aria-describedby="emailHelp"
+                          placeholder="Enter Email Address..."
+                          defaultValue="" {...register("email", { required: true })} />
+                      </div>
+                      <div className="form-group">
+                        <input type="password" className={`form-control form-control-user ${showError?"border-danger":""}`}
+                          id="inputPassword" placeholder="Password"
+                          defaultValue="" {...register("password", { required: true })} />
+                      </div>
+                      <div className="form-group">
+                        <div className="custom-control custom-checkbox small">
+                          <input type="checkbox" className="custom-control-input" id="customCheck" />
+                          <label className="custom-control-label mt-3" htmlFor="customCheck">Remember
+                            Me</label>
+                        </div>
+                      </div>
+                      {showError && <p className="text-danger rounded-pill text-center p-2" >Ingresa tus credenciales correctamente</p>}
+                      <button type="submit" className="btn btn-primary btn-user btn-block mt-5">
+                        Login
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        {/* Password input */}
-        <div className="form-outline mb-4 w-100">
-          <input type="password" id="form3Example4" className="form-control" value={password} onChange={(ev)=>setPassword(ev.target.value)} />
-          <label className="form-label" htmlFor="password">
-            Password
-          </label>
-        </div>
-
-        {/* Submit button */}
-        <button type="submit" className="btn btn-dark mb-4 w-100 text-center">
-          Iniciar sesión
-        </button>
-      </form>
-      {/* Register buttons */}
-      <div className="text-center">
-        <Link className="text-muted" to="/register">
-          No estás registrado? Click aquí para crear cuenta
-        </Link>
-
-        <p>o inicia sesión con:</p>
-        <button
-          type="button"
-          className="btn btn-secondary btn-floating rounded-circle mx-1"
-        >
-          <BsFacebook size={20} />
-        </button>
-        <button
-          type="button"
-          className="btn btn-secondary btn-floating rounded-circle mx-1"
-        >
-          <BsGoogle size={20} />
-        </button>
-        <button
-          type="button"
-          className="btn btn-secondary btn-floating rounded-circle mx-1"
-        >
-          <BsTwitter size={20} />
-        </button>
       </div>
-      { showError && <p className="alert alert-danger text-center my-5" >Ingresa tus credenciales correctamente</p> }
+
+
     </div>
   );
 }

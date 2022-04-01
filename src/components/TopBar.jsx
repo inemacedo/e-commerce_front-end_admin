@@ -8,38 +8,39 @@ function TopBar() {
   const params = useParams();
   const dispatch = useDispatch();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setShowProfileMenu(false);
-  } , [params] );
+  }, [params]);
 
-  const handleLogout = ()=>{
+  const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
   }
 
   // <!------ Topbar Navbar*/}
-  
+
   return (
     <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" >
       {/* < !--Sidebar Toggle(Topbar)-- > */}
       <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
-          <i className="fa fa-bars"></i>
+        <i className="fa fa-bars"></i>
       </button>
 
       {/* <!--Topbar Search-- > */}
       <form
-          className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-          <div className="input-group">
-              <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..."
-                  aria-label="Search" aria-describedby="basic-addon2"/>
-              <div className="input-group-append">
-                  <button className="btn btn-primary" type="button">
-                      <i className="fas fa-search fa-sm"></i>
-                  </button>
-              </div>
+        className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div className="input-group">
+          <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..."
+            aria-label="Search" aria-describedby="basic-addon2" />
+          <div className="input-group-append">
+            <button className="btn btn-primary" type="button">
+              <i className="fas fa-search fa-sm"></i>
+            </button>
           </div>
+        </div>
       </form>
-                    
+
       <ul className="navbar-nav ml-auto">
 
         {/*Nav Item - Search Dropdown (Visible Only XS)*/}
@@ -55,12 +56,12 @@ function TopBar() {
               <div className="input-group">
                 <input type="text" className="form-control bg-light border-0 small"
                   placeholder="Search for..." aria-label="Search"
-                  aria-describedby="basic-addon2"/>
-                  <div className="input-group-append">
-                    <button className="btn btn-primary" type="button">
-                      <i className="fas fa-search fa-sm"></i>
-                    </button>
-                  </div>
+                  aria-describedby="basic-addon2" />
+                <div className="input-group-append">
+                  <button className="btn btn-primary" type="button">
+                    <i className="fas fa-search fa-sm"></i>
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -134,8 +135,8 @@ function TopBar() {
             <a className="dropdown-item d-flex align-items-center" href="#">
               <div className="dropdown-list-image mr-3">
                 <img className="rounded-circle" src="./img/undraw_profile_1.svg"
-                  alt="..."/>
-                  <div className="status-indicator bg-success"></div>
+                  alt="..." />
+                <div className="status-indicator bg-success"></div>
               </div>
               <div className="font-weight-bold">
                 <div className="text-truncate">Hi there! I am wondering if you can help me with a
@@ -146,8 +147,8 @@ function TopBar() {
             <a className="dropdown-item d-flex align-items-center" href="#">
               <div className="dropdown-list-image mr-3">
                 <img className="rounded-circle" src="./img/undraw_profile_2.svg"
-                  alt="..."/>
-                  <div className="status-indicator"></div>
+                  alt="..." />
+                <div className="status-indicator"></div>
               </div>
               <div>
                 <div className="text-truncate">I have the photos that you ordered last month, how
@@ -158,8 +159,8 @@ function TopBar() {
             <a className="dropdown-item d-flex align-items-center" href="#">
               <div className="dropdown-list-image mr-3">
                 <img className="rounded-circle" src="./img/undraw_profile_3.svg"
-                  alt="..."/>
-                  <div className="status-indicator bg-warning"></div>
+                  alt="..." />
+                <div className="status-indicator bg-warning"></div>
               </div>
               <div>
                 <div className="text-truncate">Last month's report looks great, I am very happy with
@@ -170,8 +171,8 @@ function TopBar() {
             <a className="dropdown-item d-flex align-items-center" href="#">
               <div className="dropdown-list-image mr-3">
                 <img className="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                  alt="..."/>
-                  <div className="status-indicator bg-success"></div>
+                  alt="..." />
+                <div className="status-indicator bg-success"></div>
               </div>
               <div>
                 <div className="text-truncate">Am I a good boy? The reason I ask is because someone
@@ -187,14 +188,14 @@ function TopBar() {
 
         {/*Nav Item - User Information*/}
         <li className="nav-item dropdown no-arrow">
-          <button className="nav-link dropdown-toggle border-0 bg-white" onClick={()=>setShowProfileMenu(prev=>!prev)} id="userDropdown" role="button"
+          <button className="nav-link dropdown-toggle border-0 bg-white" onClick={() => setShowProfileMenu(prev => !prev)} id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span className="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
             <img className="img-profile rounded-circle"
-              src="./img/undraw_profile.svg"/>
+              src="./img/undraw_profile.svg" />
           </button>
           {/*Dropdown - User Information*/}
-          <div className={`dropdown-menu dropdown-menu-right shadow animated--grow-in ${showProfileMenu?"show":""}`}
+          <div className={`dropdown-menu dropdown-menu-right shadow animated--grow-in ${showProfileMenu ? "show" : ""}`}
             aria-labelledby="userDropdown">
             <Link className="dropdown-item" to="/profile" >
               <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -209,14 +210,36 @@ function TopBar() {
               Activity Log
             </Link>
             <div className="dropdown-divider"></div>
-            <a className="dropdown-item" href="/" onClick={handleLogout} data-toggle="modal" data-target="#logoutModal">
+            <button className="dropdown-item" onClick={()=>setShowModal(true)} >
               <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
               Logout
-            </a>
+            </button>
           </div>
         </li>
 
       </ul>
+
+      {/* <!-- Logout Modal--> */}
+      <div className={`modal fade ${showModal?"show d-block":""}`} id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div className={`modal-dialog opacity-0 ${showModal?"opacity-1-delay":""}`} role="document">
+          <div className={`modal-content opacity-0 ${showModal?"opacity-1-delay":""}`}>
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+              <button className="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div className="modal-footer">
+              <button className="btn btn-secondary" type="button" onClick={()=>setShowModal(false)}>Cancel</button>
+              <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      { showModal && <div class="modal-backdrop fade show"></div> }
+
     </nav>
   )
 }
