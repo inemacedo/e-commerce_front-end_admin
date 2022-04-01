@@ -69,7 +69,7 @@ function CreateCategory() {
                   Imagen
                 </label>
                 <input
-                  className="form-control form-control-lg"
+                  className="form-control"
                   type="file"
                   {...register("image")}
                 />
