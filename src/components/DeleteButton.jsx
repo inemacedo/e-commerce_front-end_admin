@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 async function fetchData({ url, method, token }) {
   const response = await fetch(url, {
@@ -14,7 +13,7 @@ async function fetchData({ url, method, token }) {
   return data;
 }
 
-function DeleteButton({ itemId }) {
+function DeleteButton({ itemId, userId }) {
   const user = useSelector((state) => state.user);
 
   const handleDelete = async () => {
@@ -27,7 +26,7 @@ function DeleteButton({ itemId }) {
 
   return (
     <div>
-      <form action="">
+      <form>
         <button
           onClick={handleDelete}
           className="btn btn-sm btn-danger btn-circle"

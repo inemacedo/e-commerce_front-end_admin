@@ -33,7 +33,7 @@ function Products() {
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
         <h1 className="h3 mb-2 text-gray-800">Products</h1>
-        <Link className="btn btn-primary" to="/nuevo-producto">
+        <Link className="btn btn-primary" to="/products/new">
           Crear nuevo Producto
         </Link>
       </div>

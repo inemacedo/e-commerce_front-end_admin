@@ -15,6 +15,7 @@ import SideBar from "./components/SideBar";
 import TopBar from "./components/TopBar";
 import Page404 from "./pages/Page404";
 import CreateProduct from "./pages/CreateProduct";
+import CreateCategory from "./pages/CreateCategory";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -33,8 +34,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/admins/*" element={<Admins />} />
             <Route path="/categories/*" element={<Categories />} />
+            <Route path="/categories/new" element={<CreateCategory />} />
             <Route path="/products/*" element={<Products />} />
-            <Route path="/nuevo-producto" element={<CreateProduct />} />
+            <Route path="/products/new" element={<CreateProduct />} />
             <Route path="/users" element={<Users />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<Page404 />} />

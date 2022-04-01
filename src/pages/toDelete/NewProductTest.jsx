@@ -65,6 +65,18 @@ function CreateProduct() {
                 {errors.title && (
                   <p className="text-warning">{errors.title.message}</p>
                 )}
+              </div>
+              <div className="col-md-12 col-lg-6">
+                <label className="mt-2 mb-0" htmlFor="">
+                  Descripción
+                </label>
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  {...register("description")}
+                />
+              </div>
+              <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
                   Precio
                 </label>
@@ -78,15 +90,8 @@ function CreateProduct() {
                 {errors.price && (
                   <p className="text-warning">{errors.price.message}</p>
                 )}
-                <label className="mt-2 mb-0" htmlFor="">
-                  Descripción
-                </label>
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  {...register("description")}
-                />
-
+              </div>
+              <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
                   Medidas
                 </label>
@@ -95,6 +100,8 @@ function CreateProduct() {
                   type="measures"
                   {...register("measures")}
                 />
+              </div>
+              <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
                   Material
                 </label>
@@ -103,6 +110,8 @@ function CreateProduct() {
                   type="text"
                   {...register("material")}
                 />
+              </div>
+              <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
                   Estilo
                 </label>
@@ -111,6 +120,8 @@ function CreateProduct() {
                   type="text"
                   {...register("style")}
                 />
+              </div>
+              <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
                   Ambiente
                 </label>
@@ -120,7 +131,6 @@ function CreateProduct() {
                   {...register("environment")}
                 />
               </div>
-
               <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
                   Stock
@@ -130,17 +140,8 @@ function CreateProduct() {
                   type="number"
                   {...register("stock")}
                 />
-                <label className="mt-2 mb-0" htmlFor="">
-                  Categoría
-                </label>
-                <select
-                  className="form-control form-control-lg"
-                  {...register("categoryId")}
-                >
-                  <option value="1">mesas</option>
-                  <option value="2">sillas</option>
-                  <option value="3">sillones</option>
-                </select>
+              </div>
+              <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
                   Destacado
                 </label>
@@ -151,28 +152,34 @@ function CreateProduct() {
                   <option value="true">Si</option>
                   <option value="false">No</option>
                 </select>
+              </div>
+              <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
                   Imagen Principal
                 </label>
                 <input
                   className="form-control form-control-lg"
-                  type="file"
+                  type="text"
                   {...register("image")}
                 />
+              </div>
+              <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
                   Imagen Ambiente
                 </label>
                 <input
                   className="form-control form-control-lg"
-                  type="file"
+                  type="text"
                   {...register("imageenvironment")}
                 />
+              </div>
+              <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
                   Imagen Medidas
                 </label>
                 <input
                   className="form-control form-control-lg"
-                  type="file"
+                  type="text"
                   {...register("imagemeasures")}
                 />
               </div>
