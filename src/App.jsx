@@ -16,6 +16,7 @@ import TopBar from "./components/TopBar";
 import Page404 from "./pages/Page404";
 import CreateProduct from "./pages/CreateProduct";
 import CreateCategory from "./pages/CreateCategory";
+import CreateAdmin from "./pages/CreateAdmin";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -33,6 +34,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/admins/*" element={<Admins />} />
+            <Route path="/admins/new" element={<CreateAdmin />} />
             <Route path="/categories/*" element={<Categories />} />
             <Route path="/categories/new" element={<CreateCategory />} />
             <Route path="/products/*" element={<Products />} />

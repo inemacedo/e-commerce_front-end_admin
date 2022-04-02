@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import "../css/index.css";
 
 async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
@@ -69,7 +70,7 @@ function CreateCategory() {
                   Imagen
                 </label>
                 <input
-                  className="form-control form-control-lg"
+                  className="input-file form-control form-control-lg"
                   type="file"
                   {...register("image")}
                 />

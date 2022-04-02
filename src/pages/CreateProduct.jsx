@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import "../css/index.css";
 
 async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
@@ -155,7 +156,7 @@ function CreateProduct() {
                   Imagen Principal
                 </label>
                 <input
-                  className="form-control form-control-lg"
+                  className="form-control form-control-lg input-file"
                   type="file"
                   {...register("image")}
                 />
@@ -163,7 +164,7 @@ function CreateProduct() {
                   Imagen Ambiente
                 </label>
                 <input
-                  className="form-control form-control-lg"
+                  className="form-control form-control-lg input-file"
                   type="file"
                   {...register("imageenvironment")}
                 />
@@ -171,7 +172,7 @@ function CreateProduct() {
                   Imagen Medidas
                 </label>
                 <input
-                  className="form-control form-control-lg"
+                  className="form-control form-control-lg input-file"
                   type="file"
                   {...register("imagemeasures")}
                 />

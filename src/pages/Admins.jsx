@@ -19,7 +19,7 @@ async function fetchData({ url, method, token }) {
   /* <CreateItem /> */
 }
 
-function ShowAdmins() {
+function Admins() {
   const user = useSelector((state) => state.user);
   const [admins, setAdmins] = useState([]);
 
@@ -100,72 +100,6 @@ function ShowAdmins() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function Admins(params) {
-  return (
-    <div>
-      <Routes>
-        <Route path="/" element={<ShowAdmins />} />
-        <Route
-          path="/new"
-          element={
-            <CreateItem>
-              <form action="" onSubmit={(ev) => ev.preventDefault()}>
-                <div className="row">
-                  <div className="col-md-12 col-lg-6">
-                    <label className="mt-2 mb-0" htmlFor="">
-                      Firstname
-                    </label>
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                    />
-                  </div>
-                  <div className="col-md-12 col-lg-6">
-                    <label className="mt-2 mb-0" htmlFor="">
-                      Lastname
-                    </label>
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                    />
-                  </div>
-                  <div className="col-md-12 col-lg-6">
-                    <label className="mt-2 mb-0" htmlFor="">
-                      Email
-                    </label>
-                    <input
-                      className="form-control form-control-lg"
-                      type="email"
-                    />
-                  </div>
-                  <div className="col-md-12 col-lg-6">
-                    <label className="mt-2 mb-0" htmlFor="">
-                      Password
-                    </label>
-                    <input
-                      className="form-control form-control-lg"
-                      type="password"
-                    />
-                  </div>
-                </div>
-                <button
-                  className="btn btn-primary btn-icon-split mt-4"
-                  type="submit"
-                >
-                  <span className="icon text-white-50">
-                    <i className="fas fa-check"></i>
-                  </span>
-                  <span className="text">Create</span>
-                </button>
-              </form>
-            </CreateItem>
-          }
-        />
-      </Routes>
     </div>
   );
 }
