@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
-import CreateItem from "./CreateItem";
+import { Link } from "react-router-dom";
+import DeleteButton from "../components/DeleteButton";
+import EditButton from "../components/EditButton";
 
 async function fetchData({ url, method, token }) {
   const response = await fetch(url, {
@@ -22,6 +23,17 @@ async function fetchData({ url, method, token }) {
 function Admins() {
   const user = useSelector((state) => state.user);
   const [admins, setAdmins] = useState([]);
+
+  const handleDelete = async (itemId) => {
+    await fetchData({
+      url: process.env.REACT_APP_API_URL + `/admins/${itemId}`,
+      method: "DELETE",
+      token: user.token,
+    });
+    setAdmins((prevProducts) =>
+      prevProducts.filter((product) => product.id !== itemId)
+    );
+  };
 
   useEffect(() => {
     const getAdmins = async () => {
@@ -89,9 +101,8 @@ function Admins() {
                     <td>{item.lastname}</td>
                     <td>{item.email}</td>
                     <td>
-                      <button className="btn btn-sm btn-danger btn-circle">
-                        <i className="fas fa-trash"></i>
-                      </button>
+                      <EditButton />
+                      <DeleteButton onClick={() => handleDelete(item.id)} />
                     </td>
                   </tr>
                 ))}

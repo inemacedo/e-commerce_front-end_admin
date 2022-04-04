@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import "../css/index.css";
 
 async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
@@ -16,7 +15,7 @@ async function fetchData({ url, method, token, body }) {
   return data;
 }
 
-function CreateCategory() {
+function CreateAdmin() {
   const user = useSelector((state) => state.user);
   const {
     register,
@@ -25,19 +24,19 @@ function CreateCategory() {
   } = useForm();
   const onSubmit = async (data) => {
     await fetchData({
-      url: process.env.REACT_APP_API_URL + "/categories",
+      url: process.env.REACT_APP_API_URL + "/admins",
       method: "POST",
       token: user.token,
       body: data,
     });
     console.log(data);
-  }; // your form submit function which will invoke after successful validation
+  };
 
   return (
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
-        <h1 className="h3 mb-2 text-gray-800">Nueva Categoría</h1>
-        <Link className="btn btn-dark" to="/categories">
+        <h1 className="h3 mb-2 text-gray-800">Nuevo Administrador</h1>
+        <Link className="btn btn-dark" to="/admins">
           Volver
         </Link>
       </div>
@@ -50,26 +49,51 @@ function CreateCategory() {
             <div className="row">
               <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">
-                  Título
+                  Nombre
                 </label>
                 <input
                   className="form-control form-control-lg"
                   type="text"
                   defaultValue=""
-                  {...register("name", {
+                  {...register("firstname", {
                     required: "Este campo es obligatorio",
                   })}
                 />
                 {errors.name && (
-                  <p className="text-warning">{errors.name.message}</p>
+                  <p className="text-warning">{errors.firstname.message}</p>
                 )}
                 <label className="mt-2 mb-0" htmlFor="">
-                  Imagen
+                  Apellido
                 </label>
                 <input
                   className="input-file form-control form-control-lg"
-                  type="file"
-                  {...register("image")}
+                  type="text"
+                  {...register("lastname", {
+                    required: "Este campo es obligatorio",
+                  })}
+                />
+                {errors.name && (
+                  <p className="text-warning">{errors.lastname.message}</p>
+                )}
+                <label className="mt-2 mb-0" htmlFor="">
+                  Email
+                </label>
+                <input
+                  className="input-file form-control form-control-lg"
+                  type="email"
+                  {...register("email", {
+                    required: "Este campo es obligatorio",
+                  })}
+                />
+                <label className="mt-2 mb-0" htmlFor="">
+                  Password
+                </label>
+                <input
+                  className="input-file form-control form-control-lg"
+                  type="text"
+                  {...register("password", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
               </div>
             </div>
@@ -89,4 +113,4 @@ function CreateCategory() {
   );
 }
 
-export default CreateCategory;
+export default CreateAdmin;

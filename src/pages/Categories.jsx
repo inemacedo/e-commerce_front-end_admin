@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import DeleteButton from "../components/DeleteButton";
+import EditButton from "../components/EditButton";
 
 async function fetchData({ url, method, token }) {
   const response = await fetch(url, {
@@ -17,6 +19,17 @@ async function fetchData({ url, method, token }) {
 function Categories() {
   const [categories, setCategories] = useState([]);
   const user = useSelector((state) => state.user);
+
+  const handleDelete = async (itemId) => {
+    await fetchData({
+      url: process.env.REACT_APP_API_URL + `/categories/${itemId}`,
+      method: "DELETE",
+      token: user.token,
+    });
+    setCategories((prevProducts) =>
+      prevProducts.filter((product) => product.id !== itemId)
+    );
+  };
 
   useEffect(() => {
     const getAdmins = async () => {
@@ -80,16 +93,15 @@ function Categories() {
                 </tr>
               </tfoot>
               <tbody>
-                {categories.map((user) => (
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.name}</td>
-                    <td>{user.slug}</td>
-                    <td>{user.createdAt}</td>
+                {categories.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.slug}</td>
+                    <td>{item.createdAt}</td>
                     <td>
-                      <button className="btn btn-sm btn-danger btn-circle">
-                        <i className="fas fa-trash"></i>
-                      </button>
+                      <EditButton />
+                      <DeleteButton onClick={() => handleDelete(item.id)} />
                     </td>
                   </tr>
                 ))}

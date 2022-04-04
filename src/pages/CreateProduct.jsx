@@ -40,7 +40,7 @@ function CreateProduct() {
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
         <h1 className="h3 mb-2 text-gray-800">Nuevo Producto</h1>
-        <Link className="btn btn-dark" to="/categories">
+        <Link className="btn btn-dark" to="/products">
           Volver
         </Link>
       </div>
