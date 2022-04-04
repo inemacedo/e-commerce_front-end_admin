@@ -6,7 +6,7 @@ function DeleteButton({ onClick }) {
   return (
     <div>
       <button onClick={onClick} className="btn btn-sm">
-        <FaRegTrashAlt size={15} />
+        <FaRegTrashAlt size={16} />
       </button>
     </div>
   );

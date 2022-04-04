@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DeleteButton from "../components/DeleteButton";
 import EditButton from "../components/EditButton";
+import { format, parseISO } from "date-fns";
 
 async function fetchData({ url, method, token }) {
   const response = await fetch(url, {
@@ -54,10 +55,6 @@ function Categories() {
           Crear nueva Categoria
         </Link>
       </div>
-      <p className="mb-4">
-        DataTables is a third party plugin that is used to generate the demo
-        table below. For more information about DataTables.
-      </p>
 
       {/* <!-- DataTales Example --> */}
       <div className="card shadow mb-4">
@@ -78,7 +75,6 @@ function Categories() {
                 <tr>
                   <th>id</th>
                   <th>Name</th>
-                  <th>Slug</th>
                   <th>Created At</th>
                   <th>Actions</th>
                 </tr>
@@ -87,7 +83,6 @@ function Categories() {
                 <tr>
                   <th>id</th>
                   <th>Name</th>
-                  <th>Slug</th>
                   <th>Created At</th>
                   <th>Actions</th>
                 </tr>
@@ -97,8 +92,7 @@ function Categories() {
                   <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.name}</td>
-                    <td>{item.slug}</td>
-                    <td>{item.createdAt}</td>
+                    <td>{format(parseISO(item.createdAt), "PP")}</td>
                     <td>
                       <EditButton />
                       <DeleteButton onClick={() => handleDelete(item.id)} />

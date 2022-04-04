@@ -46,11 +46,6 @@ function Users() {
   return (
     <div className="container-fluid">
       <h1 className="h3 mb-2 text-gray-800">Users</h1>
-      <p className="mb-4">
-        DataTables is a third party plugin that is used to generate the demo
-        table below. For more information about DataTables.
-      </p>
-
       {/* <!-- DataTales Example --> */}
       <div className="card shadow mb-4">
         <div className="card-header py-3">

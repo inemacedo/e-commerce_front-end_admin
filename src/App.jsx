@@ -17,6 +17,7 @@ import Page404 from "./pages/Page404";
 import CreateProduct from "./pages/CreateProduct";
 import CreateCategory from "./pages/CreateCategory";
 import CreateAdmin from "./pages/CreateAdmin";
+import EditAdmin from "./pages/EditAdmin";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -35,6 +36,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/admins/*" element={<Admins />} />
             <Route path="/admins/new" element={<CreateAdmin />} />
+            <Route path="/admins/edit" element={<EditAdmin />} />
             <Route path="/categories/*" element={<Categories />} />
             <Route path="/categories/new" element={<CreateCategory />} />
             <Route path="/products/*" element={<Products />} />

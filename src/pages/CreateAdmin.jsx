@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
@@ -17,6 +17,8 @@ async function fetchData({ url, method, token, body }) {
 
 function CreateAdmin() {
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -97,10 +99,7 @@ function CreateAdmin() {
                 />
               </div>
             </div>
-            <button
-              className="btn btn-primary btn-icon-split mt-4"
-              type="submit"
-            >
+            <button className="btn btn-primary btn-icon-split mt-4">
               <span className="icon text-white-50">
                 <i className="fas fa-check"></i>
               </span>
