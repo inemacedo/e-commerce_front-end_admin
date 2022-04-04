@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DeleteButton from "../components/DeleteButton";
 import EditButton from "../components/EditButton";
 
-async function fetchData({ url, method, body }) {
+async function fetchData({ url, method, body, token }) {
   const response = await fetch(url, {
     method: method,
-    body: JSON.stringify(body),
-    headers: { "Content-Type": "application/json" },
+    body: body ? JSON.stringify(body) : undefined,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
   });
   const data = await response.json();
   return data;
@@ -15,14 +19,26 @@ async function fetchData({ url, method, body }) {
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const user = useSelector((state) => state.user);
+
+  const handleDelete = async (itemId) => {
+    await fetchData({
+      url: process.env.REACT_APP_API_URL + `/products/${itemId}`,
+      method: "DELETE",
+      token: user.token,
+    });
+    setProducts((prevProducts) =>
+      prevProducts.filter((product) => product.id !== itemId)
+    );
+  };
 
   useEffect(() => {
     const getProducts = async () => {
       const data = await fetchData({
         url: process.env.REACT_APP_API_URL + "/products?limit=100",
         method: "GET",
+        token: user.token,
       });
-      console.log(data);
       setProducts(data);
     };
     getProducts();
@@ -95,7 +111,7 @@ function Products() {
                     <td>{item.createdAt}</td>
                     <td>
                       <EditButton />
-                      <DeleteButton itemId={item.id} />
+                      <DeleteButton onClick={() => handleDelete(item.id)} />
                     </td>
                   </tr>
                 ))}
