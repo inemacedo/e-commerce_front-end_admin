@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DeleteButton from "../components/DeleteButton";
+import EditButton from "../components/EditButton";
 
 async function fetchData({ url, method, body }) {
   const response = await fetch(url, {
@@ -93,6 +94,7 @@ function Products() {
                     </td>
                     <td>{item.createdAt}</td>
                     <td>
+                      <EditButton />
                       <DeleteButton itemId={item.id} />
                     </td>
                   </tr>

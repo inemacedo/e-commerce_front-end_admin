@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 async function fetchData({ url, method, token }) {
   const response = await fetch(url, {
@@ -13,7 +14,7 @@ async function fetchData({ url, method, token }) {
   return data;
 }
 
-function DeleteButton({ itemId, userId }) {
+function DeleteButton({ itemId }) {
   const user = useSelector((state) => state.user);
 
   const handleDelete = async () => {
@@ -26,12 +27,9 @@ function DeleteButton({ itemId, userId }) {
 
   return (
     <div>
-      <form>
-        <button
-          onClick={handleDelete}
-          className="btn btn-sm btn-danger btn-circle"
-        >
-          <i className="fas fa-trash"></i>
+      <form action="">
+        <button onClick={handleDelete} className="btn btn-sm">
+          <FaRegTrashAlt size={16} />
         </button>
       </form>
     </div>
