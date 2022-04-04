@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function TopBar() {
   const params = useParams();
@@ -29,7 +29,7 @@ function TopBar() {
       </button>
 
       {/* <!--Topbar Search-- > */}
-      <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+      {/* <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div className="input-group">
           <input
             type="text"
@@ -44,7 +44,7 @@ function TopBar() {
             </button>
           </div>
         </div>
-      </form>
+      </form> */}
 
       <ul className="navbar-nav ml-auto">
         {/*Nav Item - Search Dropdown (Visible Only XS)*/}
@@ -262,7 +262,7 @@ function TopBar() {
             aria-expanded="false"
           >
             <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-              Douglas McGee
+              Admin
             </span>
             <img
               className="img-profile rounded-circle"
