@@ -30,8 +30,8 @@ function Admins() {
       method: "DELETE",
       token: user.token,
     });
-    setAdmins((prevProducts) =>
-      prevProducts.filter((product) => product.id !== itemId)
+    setAdmins((prevAdmins) =>
+      prevAdmins.filter((admin) => admin.id !== itemId)
     );
   };
 

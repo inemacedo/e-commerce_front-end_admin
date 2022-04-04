@@ -26,8 +26,8 @@ function Categories() {
       method: "DELETE",
       token: user.token,
     });
-    setCategories((prevProducts) =>
-      prevProducts.filter((product) => product.id !== itemId)
+    setCategories((prevCategories) =>
+      prevCategories.filter((category) => category.id !== itemId)
     );
   };
 

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import EditButton from "../components/EditButton";
+import DeleteButton from "../components/DeleteButton";
 
 async function fetchData({ url, method, token }) {
   const response = await fetch(url, {
@@ -13,9 +15,18 @@ async function fetchData({ url, method, token }) {
   return data;
 }
 
-function Tables() {
+function Users() {
   const [users, setUsers] = useState([]);
   const user = useSelector((state) => state.user);
+
+  const handleDelete = async (userId) => {
+    await fetchData({
+      url: process.env.REACT_APP_API_URL + `/users/${userId}`,
+      method: "DELETE",
+      token: user.token,
+    });
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+  };
 
   useEffect(() => {
     const getAdmins = async () => {
@@ -84,9 +95,8 @@ function Tables() {
                     <td>{user.email}</td>
                     <td>{user.createdAt}</td>
                     <td>
-                      <button className="btn btn-sm btn-danger btn-circle">
-                        <i className="fas fa-trash"></i>
-                      </button>
+                      <EditButton />
+                      <DeleteButton onClick={() => handleDelete(user.id)} />
                     </td>
                   </tr>
                 ))}
@@ -99,4 +109,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default Users;
