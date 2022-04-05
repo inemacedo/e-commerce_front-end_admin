@@ -28,7 +28,7 @@ function EditButton({ onClick }) {
   return (
     <div>
       <button onClick={onClick} className="btn btn-sm">
-        <FaRegEdit size={17} />
+        <FaRegEdit size={18} />
       </button>
     </div>
   );

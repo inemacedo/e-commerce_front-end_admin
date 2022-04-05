@@ -1,4 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
+import { AiOutlineDashboard } from "react-icons/ai";
+import { RiAdminLine } from "react-icons/ri";
+import { BiCategoryAlt } from "react-icons/bi";
+import { RiProductHuntLine } from "react-icons/ri";
+import { FiUsers, FiShoppingCart } from "react-icons/fi";
 
 function SideBar() {
   const { pathname } = useLocation();
@@ -25,8 +30,8 @@ function SideBar() {
       {/*Nav Item - Dashboard*/}
       <li className={`nav-item ${pathname === "/" ? "active" : ""}`}>
         <Link className="nav-link" to="/">
-          <i className="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
+          <AiOutlineDashboard />
+          <span className="p-2">Dashboard</span>
         </Link>
       </li>
 
@@ -43,8 +48,8 @@ function SideBar() {
         }`}
       >
         <Link className="nav-link" to="/admins">
-          <i className="fas fa-fw fa-table"></i>
-          <span>Admins</span>
+          <RiAdminLine />
+          <span className="p-2">Admins</span>
         </Link>
       </li>
 
@@ -57,24 +62,32 @@ function SideBar() {
         }`}
       >
         <Link className="nav-link" to="/categories">
-          <i className="fas fa-fw fa-table"></i>
-          <span>Categories</span>
+          <BiCategoryAlt />
+          <span className="p-2">Categories</span>
         </Link>
       </li>
 
       {/*Nav Item - Products*/}
       <li className={`nav-item ${pathname === "/products" ? "active" : ""}`}>
         <Link className="nav-link" to="/products">
-          <i className="fas fa-fw fa-table"></i>
-          <span>Products</span>
+          <RiProductHuntLine />
+          <span className="p-2">Products</span>
         </Link>
       </li>
 
       {/*Nav Item - Users*/}
       <li className={`nav-item ${pathname === "/users" ? "active" : ""}`}>
         <Link className="nav-link" to="/users">
-          <i className="fas fa-fw fa-table"></i>
-          <span>Users</span>
+          <FiUsers />
+          <span className="p-2">Users</span>
+        </Link>
+      </li>
+
+      {/*Nav Item - Orders*/}
+      <li className={`nav-item ${pathname === "/users" ? "active" : ""}`}>
+        <Link className="nav-link" to="/users">
+          <FiShoppingCart />
+          <span className="p-2">Orders</span>
         </Link>
       </li>
 
