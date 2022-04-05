@@ -118,12 +118,14 @@ function Admins() {
               </tfoot>
               <tbody>
                 {admins.map((admin) => (
-                  <tr key={1}>
+                  <tr key={admin.id}>
                     <td>{admin.firstname}</td>
                     <td>{admin.lastname}</td>
                     <td>{admin.email}</td>
                     <td>
-                      <EditButton onClick={() => navigate("/admins/edit")} />
+                      <EditButton
+                        onClick={() => navigate(`/admins/edit/${admin.id}`)}
+                      />
                       <DeleteButton onClick={() => handleDelete(admin.id)} />
                     </td>
                   </tr>

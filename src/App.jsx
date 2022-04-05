@@ -37,7 +37,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/admins/*" element={<Admins />} />
             <Route path="/admins/new" element={<CreateAdmin />} />
-            <Route path="/admins/edit" element={<EditAdmin />} />
+            <Route path="/admins/edit/:id" element={<EditAdmin />} />
             <Route path="/categories/*" element={<Categories />} />
             <Route path="/categories/new" element={<CreateCategory />} />
             <Route path="/products/*" element={<Products />} />
