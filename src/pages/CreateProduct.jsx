@@ -152,7 +152,7 @@ function CreateProduct() {
                   <option value="true">Si</option>
                   <option value="false">No</option>
                 </select>
-                <label className="mt-2 mb-0" htmlFor="">
+                {/* <label className="mt-2 mb-0" htmlFor="">
                   Imagen Principal
                 </label>
                 <input
@@ -170,12 +170,12 @@ function CreateProduct() {
                 />
                 <label className="mt-2 mb-0" htmlFor="">
                   Imagen Medidas
-                </label>
-                <input
+                </label> */}
+                {/* <input
                   className="form-control form-control-lg input-file"
                   type="file"
                   {...register("imagemeasures")}
-                />
+                /> */}
               </div>
             </div>
             <button

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import EditButton from "../components/EditButton";
 import DeleteButton from "../components/DeleteButton";
+import { Toast } from "react-bootstrap";
+import { ToastContainer } from "react-bootstrap";
+import { TiDeleteOutline } from "react-icons/ti";
 
 async function fetchData({ url, method, token }) {
   const response = await fetch(url, {
@@ -19,7 +22,10 @@ function Users() {
   const [users, setUsers] = useState([]);
   const user = useSelector((state) => state.user);
 
+  const [show, setShow] = useState(false);
+
   const handleDelete = async (userId) => {
+    setShow(true);
     await fetchData({
       url: process.env.REACT_APP_API_URL + `/users/${userId}`,
       method: "DELETE",
@@ -47,6 +53,26 @@ function Users() {
     <div className="container-fluid">
       <h1 className="h3 mb-2 text-gray-800">Users</h1>
       {/* <!-- DataTales Example --> */}
+      <div className="toast-delete d-flex justify-content-center">
+        <ToastContainer
+          style={{ transition: "all .15s" }}
+          className={`${show ? "opacity-1" : "opacity-0"} bg-white m-2 p-0`}
+          position="top-end"
+        >
+          <Toast
+            className="bg-"
+            onClose={() => setShow(false)}
+            show={show}
+            delay={5000}
+            autohide
+          >
+            <Toast.Body className="text-dark">
+              <TiDeleteOutline color="red" size="18" /> Se elimino Administrador
+              correctamente
+            </Toast.Body>
+          </Toast>
+        </ToastContainer>
+      </div>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
