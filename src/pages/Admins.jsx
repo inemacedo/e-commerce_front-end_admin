@@ -118,7 +118,7 @@ function Admins() {
               </tfoot>
               <tbody>
                 {admins.map((admin) => (
-                  <tr key={admin.id}>
+                  <tr key={1}>
                     <td>{admin.firstname}</td>
                     <td>{admin.lastname}</td>
                     <td>{admin.email}</td>

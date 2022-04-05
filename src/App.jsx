@@ -18,6 +18,7 @@ import CreateProduct from "./pages/CreateProduct";
 import CreateCategory from "./pages/CreateCategory";
 import CreateAdmin from "./pages/CreateAdmin";
 import EditAdmin from "./pages/EditAdmin";
+import EditProduct from "./pages/EditProduct";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -41,6 +42,7 @@ function App() {
             <Route path="/categories/new" element={<CreateCategory />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/products/new" element={<CreateProduct />} />
+            <Route path="/products/edit/:slug" element={<EditProduct />} />
             <Route path="/users" element={<Users />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<Page404 />} />

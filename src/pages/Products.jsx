@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DeleteButton from "../components/DeleteButton";
 import EditButton from "../components/EditButton";
 import { format, parseISO } from "date-fns";
@@ -24,6 +24,7 @@ async function fetchData({ url, method, body, token }) {
 function Products() {
   const [products, setProducts] = useState([]);
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
@@ -104,6 +105,7 @@ function Products() {
                   <th>Price(USD)</th>
                   <th>Category</th>
                   <th>Description</th>
+                  <th>Material</th>
                   <th>Created At</th>
                   <th>Actions</th>
                 </tr>
@@ -115,6 +117,7 @@ function Products() {
                   <th>Price(USD)</th>
                   <th>Category</th>
                   <th>Description</th>
+                  <th>Material</th>
                   <th>Created At</th>
                   <th>Actions</th>
                 </tr>
@@ -131,9 +134,13 @@ function Products() {
                         {item.description}
                       </span>
                     </td>
+                    <td>{item.material}</td>
+
                     <td>{format(parseISO(item.createdAt), "PP")}</td>
                     <td>
-                      <EditButton />
+                      <EditButton
+                        onClick={() => navigate(`/products/edit/${item.slug}`)}
+                      />
                       <DeleteButton onClick={() => handleDelete(item.id)} />
                     </td>
                   </tr>

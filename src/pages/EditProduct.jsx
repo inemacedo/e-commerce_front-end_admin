@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../css/index.css";
+import { useEffect, useState } from "react";
 
 async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
@@ -16,8 +17,10 @@ async function fetchData({ url, method, token, body }) {
   return data;
 }
 
-function CreateProduct() {
+function EditAdmin() {
   const user = useSelector((state) => state.user);
+  const { slug, id } = useParams();
+  const [product, setProduct] = useState({});
   const {
     register,
     handleSubmit,
@@ -25,22 +28,34 @@ function CreateProduct() {
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    const getAdmin = async () => {
+      const data = await fetchData({
+        url: process.env.REACT_APP_API_URL + `/products/${slug}`,
+        method: "GET",
+        token: user.token,
+      });
+      console.log(data);
+      setProduct(data);
+    };
+    getAdmin();
+  }, []);
+
   const onSubmit = async (data) => {
     await fetchData({
-      url: process.env.REACT_APP_API_URL + "/products",
-      method: "POST",
+      url: process.env.REACT_APP_API_URL + `/products/${id}`,
+      method: "PATCH",
       token: user.token,
       body: data,
     });
     console.log(data);
   }; // your form submit function which will invoke after successful validation
-
-  console.log(watch("featured", "categoryId")); // you can watch individual input by pass the name of the input
+  //   console.log(watch("title"));
 
   return (
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
-        <h1 className="h3 mb-2 text-gray-800">Nuevo Producto</h1>
+        <h1 className="h3 mb-2 text-gray-800">Editar Producto</h1>
         <Link className="btn btn-dark" to="/products">
           Volver
         </Link>
@@ -59,33 +74,35 @@ function CreateProduct() {
                 <input
                   className="form-control form-control-lg"
                   type="text"
-                  defaultValue=""
+                  defaultValue={product.title}
                   {...register("title", {
                     required: "Este campo es obligatorio",
                   })}
                 />
-                {errors.title && (
+                {/* {errors.title && (
                   <p className="text-warning">{errors.title.message}</p>
-                )}
+                )} */}
                 <label className="mt-2 mb-0" htmlFor="">
                   Precio
                 </label>
                 <input
                   className="form-control form-control-lg"
                   type="number"
+                  defaultValue={product.price}
                   {...register("price", {
                     required: "Este campo es obligatorio",
                   })}
                 />
-                {errors.price && (
+                {/* {errors.price && (
                   <p className="text-warning">{errors.price.message}</p>
-                )}
+                )} */}
                 <label className="mt-2 mb-0" htmlFor="">
                   Descripción
                 </label>
                 <input
                   className="form-control form-control-lg"
                   type="text"
+                  defaultValue={product.description}
                   {...register("description")}
                 />
 
@@ -95,6 +112,7 @@ function CreateProduct() {
                 <input
                   className="form-control form-control-lg"
                   type="measures"
+                  defaultValue={product.measures}
                   {...register("measures")}
                 />
                 <label className="mt-2 mb-0" htmlFor="">
@@ -103,6 +121,7 @@ function CreateProduct() {
                 <input
                   className="form-control form-control-lg"
                   type="text"
+                  defaultValue={product.material}
                   {...register("material")}
                 />
                 <label className="mt-2 mb-0" htmlFor="">
@@ -111,6 +130,7 @@ function CreateProduct() {
                 <input
                   className="form-control form-control-lg"
                   type="text"
+                  defaultValue={product.style}
                   {...register("style")}
                 />
                 <label className="mt-2 mb-0" htmlFor="">
@@ -119,6 +139,7 @@ function CreateProduct() {
                 <input
                   className="form-control form-control-lg"
                   type="text"
+                  defaultValue={product.environment}
                   {...register("environment")}
                 />
               </div>
@@ -130,6 +151,7 @@ function CreateProduct() {
                 <input
                   className="form-control form-control-lg"
                   type="number"
+                  defaultValue={product.stock}
                   {...register("stock")}
                 />
                 <label className="mt-2 mb-0" htmlFor="">
@@ -186,7 +208,7 @@ function CreateProduct() {
               <span className="icon text-white-50">
                 <i className="fas fa-check"></i>
               </span>
-              <span className="text">Create</span>
+              <span className="text">Guardar</span>
             </button>
           </form>
         </div>
@@ -195,4 +217,4 @@ function CreateProduct() {
   );
 }
 
-export default CreateProduct;
+export default EditAdmin;
