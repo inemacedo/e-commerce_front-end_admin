@@ -3,7 +3,6 @@ import { Routes, Route, Navigate, Link } from "react-router-dom";
 function CreateItem({ children }) {
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    console.log("Submit form");
   };
 
   // <!-- Page Heading -->

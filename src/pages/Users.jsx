@@ -41,7 +41,6 @@ function Users() {
         method: "GET",
         token: user.token,
       });
-      console.log(data);
       setUsers(data);
     };
     getAdmins();

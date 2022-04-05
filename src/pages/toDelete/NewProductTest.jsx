@@ -30,10 +30,9 @@ function CreateProduct() {
       token: user.token,
       body: data,
     });
-    console.log(data);
   }; // your form submit function which will invoke after successful validation
 
-  console.log(watch("featured", "categoryId")); // you can watch individual input by pass the name of the input
+  // console.log(watch("featured", "categoryId")); // you can watch individual input by pass the name of the input
 
   return (
     <div className="container-fluid">
