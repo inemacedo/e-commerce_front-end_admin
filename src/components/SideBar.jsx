@@ -7,7 +7,6 @@ import { FiUsers, FiShoppingCart } from "react-icons/fi";
 
 function SideBar() {
   const { pathname } = useLocation();
-  console.log(pathname);
 
   // Sidebar
 
@@ -84,10 +83,10 @@ function SideBar() {
       </li>
 
       {/*Nav Item - Orders*/}
-      <li className={`nav-item ${pathname === "/users" ? "active" : ""}`}>
-        <Link className="nav-link" to="/users">
+      <li className={`nav-item ${pathname === "/orders" ? "active" : ""}`}>
+        <Link className="nav-link" to="/orders">
           <FiShoppingCart />
-          <span className="p-2">Orders</span>
+          <span className="p-2">Pedidos</span>
         </Link>
       </li>
 

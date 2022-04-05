@@ -31,7 +31,6 @@ function CreateAdmin() {
       token: user.token,
       body: data,
     });
-    console.log(data);
   };
 
   return (

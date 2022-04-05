@@ -32,10 +32,9 @@ function CreateProduct() {
       token: user.token,
       body: data,
     });
-    console.log(data);
   }; // your form submit function which will invoke after successful validation
 
-  console.log(watch("featured", "categoryId")); // you can watch individual input by pass the name of the input
+  // console.log(watch("featured", "categoryId")); // you can watch individual input by pass the name of the input
 
   return (
     <div className="container-fluid">
@@ -160,6 +159,7 @@ function CreateProduct() {
                   className="form-control form-control-lg input-file"
                   type="file"
                   {...register("image")}
+                  accept="image/png, image/jpeg"
                 />
                 <label className="mt-2 mb-0" htmlFor="">
                   Imagen Ambiente
@@ -168,15 +168,16 @@ function CreateProduct() {
                   className="form-control form-control-lg input-file"
                   type="file"
                   {...register("imageenvironment")}
+                  accept="image/png, image/jpeg"
                 />
                 <label className="mt-2 mb-0" htmlFor="">
                   Imagen Medidas
-                </label> */}
-                {/* <input
+                </label>  <input
                   className="form-control form-control-lg input-file"
                   type="file"
                   {...register("imagemeasures")}
-                /> */}
+                  accept="image/png, image/jpeg"
+                />*/}
               </div>
             </div>
             <button

@@ -30,7 +30,6 @@ function CreateCategory() {
       token: user.token,
       body: data,
     });
-    console.log(data);
   }; // your form submit function which will invoke after successful validation
 
   return (

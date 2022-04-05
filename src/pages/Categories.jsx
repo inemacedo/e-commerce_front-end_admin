@@ -45,7 +45,7 @@ function Categories() {
         method: "GET",
         token: user.token,
       });
-      console.log(data);
+
       setCategories(data);
     };
     getAdmins();
