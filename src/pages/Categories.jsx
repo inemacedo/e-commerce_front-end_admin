@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import DeleteButton from "../components/DeleteButton";
 import EditButton from "../components/EditButton";
 import { format, parseISO } from "date-fns";
+import { Toast } from "react-bootstrap";
+import { ToastContainer } from "react-bootstrap";
+import { TiDeleteOutline } from "react-icons/ti";
 
 async function fetchData({ url, method, token }) {
   const response = await fetch(url, {
@@ -21,7 +24,10 @@ function Categories() {
   const [categories, setCategories] = useState([]);
   const user = useSelector((state) => state.user);
 
+  const [show, setShow] = useState(false);
+
   const handleDelete = async (itemId) => {
+    setShow(true);
     await fetchData({
       url: process.env.REACT_APP_API_URL + `/categories/${itemId}`,
       method: "DELETE",
@@ -51,6 +57,26 @@ function Categories() {
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
         <h1 className="h3 mb-2 text-gray-800">Categories</h1>
+        <div className="toast-delete d-flex justify-content-center fixed-top">
+          <ToastContainer
+            style={{ transition: "all .15s" }}
+            className={`${show ? "opacity-1" : "opacity-0"} bg-white m-2 p-0`}
+            position="top-end"
+          >
+            <Toast
+              className="bg-"
+              onClose={() => setShow(false)}
+              show={show}
+              delay={5000}
+              autohide
+            >
+              <Toast.Body className="text-dark">
+                <TiDeleteOutline color="red" size="18" /> Se elimino Categoría
+                correctamente
+              </Toast.Body>
+            </Toast>
+          </ToastContainer>
+        </div>
         <Link className="btn btn-primary" to="/categories/new">
           Crear nueva Categoria
         </Link>

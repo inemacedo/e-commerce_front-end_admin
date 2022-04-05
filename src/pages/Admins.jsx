@@ -60,7 +60,7 @@ function Admins() {
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
         <h1 className="h3 mb-2 text-gray-800">Admins</h1>
-        <div className="toast-delete d-flex justify-content-center">
+        <div className="toast-delete d-flex justify-content-center fixed-top">
           <ToastContainer
             style={{ transition: "all .15s" }}
             className={`${show ? "opacity-1" : "opacity-0"} bg-white m-2 p-0`}

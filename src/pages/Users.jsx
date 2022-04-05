@@ -67,7 +67,7 @@ function Users() {
             autohide
           >
             <Toast.Body className="text-dark">
-              <TiDeleteOutline color="red" size="18" /> Se elimino Administrador
+              <TiDeleteOutline color="red" size="18" /> Se elimino Usuario
               correctamente
             </Toast.Body>
           </Toast>
