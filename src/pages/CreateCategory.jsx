@@ -15,7 +15,7 @@ async function fetchData({ url, method, token, body }) {
     body: JSON.stringify(body),
   });
   const data = await response.json();
-  return {status: response.status, data};
+  return { status: response.status, data };
 }
 
 function CreateCategory() {
@@ -36,38 +36,38 @@ function CreateCategory() {
         token: user.token,
         body: data,
       });
-      if(response.status){
+      if (response.status) {
         setShowToast(true);
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   }; // your form submit function which will invoke after successful validation
 
   return (
     <div className="container-fluid">
       <div className="toast-delete d-flex justify-content-center fixed-top">
-          <ToastContainer
-            style={{ transition: "all .15s" }}
-            className={`${showToast.show ? "opacity-1" : "opacity-0"} bg-dark rounded mt-3 p-0`}
-            position="top-end"
+        <ToastContainer
+          style={{ transition: "all .15s" }}
+          className={`${
+            showToast.show ? "opacity-1" : "opacity-0"
+          } bg-dark rounded mt-3 p-0`}
+          position="top-end"
+        >
+          <Toast
+            className="bg-dark rounded"
+            onClose={() => setShowToast(false)}
+            show={showToast}
+            delay={5000}
+            autohide
           >
-            <Toast
-              className="bg-dark rounded"
-              onClose={() => setShowToast(false)}
-              show={showToast}
-              delay={5000}
-              autohide
-            >
-              <Toast.Body className="text-light">
-                Se ha creado una categoría correctamente
-              </Toast.Body>
-            </Toast>
-          </ToastContainer>
-        </div>
+            <Toast.Body className="text-light">
+              Se ha creado una categoría correctamente
+            </Toast.Body>
+          </Toast>
+        </ToastContainer>
+      </div>
       <div className="d-flex align-items-start justify-content-between my-4">
         <h1 className="h3 mb-2 text-gray-800">Nueva Categoría</h1>
-        <Link className="btn btn-dark" to="/categories">
+        <Link className="btn btn-dark" to="/categorias">
           Volver
         </Link>
       </div>
@@ -110,7 +110,7 @@ function CreateCategory() {
               <span className="icon text-white-50">
                 <i className="fas fa-check"></i>
               </span>
-              <span className="text">Create</span>
+              <span className="text">Crear Categoría</span>
             </button>
           </form>
         </div>

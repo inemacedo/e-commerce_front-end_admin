@@ -27,8 +27,8 @@ function EditAdmin() {
     watch,
     formState: { errors },
   } = useForm({
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
+    mode: "onSubmit",
+    reValidateMode: "onChange",
     defaultValues: {},
     resolver: undefined,
     context: undefined,
@@ -36,7 +36,7 @@ function EditAdmin() {
     shouldFocusError: true,
     shouldUnregister: false,
     shouldUseNativeValidation: true,
-    delayError: undefined
+    delayError: undefined,
   });
 
   useEffect(() => {
@@ -68,7 +68,7 @@ function EditAdmin() {
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
         <h1 className="h3 mb-2 text-gray-800">Editar Producto</h1>
-        <Link className="btn btn-dark" to="/products">
+        <Link className="btn btn-dark" to="/productos">
           Volver
         </Link>
       </div>

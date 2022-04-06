@@ -1,51 +1,81 @@
-
-
-
 function Row3() {
-
   // <!-- Content Row 3 -->
 
   return (
     <div className="row">
-
       {/* <!-- Content Column --> */}
       <div className="col-lg-6 mb-4">
-
         {/* <!-- Project Card Example --> */}
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Projects</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Proyectos</h6>
           </div>
           <div className="card-body">
-            <h4 className="small font-weight-bold">Server Migration <span
-              className="float-right">20%</span></h4>
+            <h4 className="small font-weight-bold">
+              Migración del Server<span className="float-right">20%</span>
+            </h4>
             <div className="progress mb-4">
-              <div className="progress-bar bg-danger" role="progressbar" style={{"width": "20%"}}
-                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+              <div
+                className="progress-bar bg-danger"
+                role="progressbar"
+                style={{ width: "20%" }}
+                aria-valuenow="20"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
             </div>
-            <h4 className="small font-weight-bold">Sales Tracking <span
-              className="float-right">40%</span></h4>
+            <h4 className="small font-weight-bold">
+              Registro de Ventas<span className="float-right">40%</span>
+            </h4>
             <div className="progress mb-4">
-              <div className="progress-bar bg-warning" role="progressbar" style={{"width": "40%"}}
-                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+              <div
+                className="progress-bar bg-warning"
+                role="progressbar"
+                style={{ width: "40%" }}
+                aria-valuenow="40"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
             </div>
-            <h4 className="small font-weight-bold">Customer Database <span
-              className="float-right">60%</span></h4>
+            <h4 className="small font-weight-bold">
+              Base de Datos de Clientes<span className="float-right">60%</span>
+            </h4>
             <div className="progress mb-4">
-              <div className="progress-bar" role="progressbar" style={{"width": "60%"}}
-                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+              <div
+                className="progress-bar"
+                role="progressbar"
+                style={{ width: "60%" }}
+                aria-valuenow="60"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
             </div>
-            <h4 className="small font-weight-bold">Payout Details <span
-              className="float-right">80%</span></h4>
+            <h4 className="small font-weight-bold">
+              Detalles de Pagos<span className="float-right">80%</span>
+            </h4>
             <div className="progress mb-4">
-              <div className="progress-bar bg-info" role="progressbar" style={{"width": "80%"}}
-                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+              <div
+                className="progress-bar bg-info"
+                role="progressbar"
+                style={{ width: "80%" }}
+                aria-valuenow="80"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
             </div>
-            <h4 className="small font-weight-bold">Account Setup <span
-              className="float-right">Complete!</span></h4>
+            <h4 className="small font-weight-bold">
+              Configuración de la Cuenta
+              <span className="float-right">Completo!</span>
+            </h4>
             <div className="progress">
-              <div className="progress-bar bg-success" role="progressbar" style={{"width": "100%"}}
-                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              <div
+                className="progress-bar bg-success"
+                role="progressbar"
+                style={{ width: "100%" }}
+                aria-valuenow="100"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
             </div>
           </div>
         </div>
@@ -117,48 +147,59 @@ function Row3() {
             </div>
           </div>
         </div>
-
       </div>
 
       <div className="col-lg-6 mb-4">
-
         {/* <!-- Illustrations --> */}
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Illustrations</h6>
+            <h6 className="m-0 font-weight-bold text-primary">
+              Hack Home Mobile
+            </h6>
           </div>
           <div className="card-body">
             <div className="text-center">
-              <img className="img-fluid px-3 px-sm-4 mt-3 mb-4" style={{"width": "25rem"}}
-                src="img/undraw_posting_photo.svg" alt="..."/>
+              <img
+                className="img-fluid px-3 px-sm-4 mt-3 mb-4"
+                style={{ width: "25rem" }}
+                src="img/undraw_posting_photo.svg"
+                alt="..."
+              />
             </div>
-            <p>Add some quality, svg illustrations to your project courtesy of <a
-              target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-              constantly updated collection of beautiful svg images that you can use
-              completely free and without attribution!</p>
-            <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-              unDraw &rarr;</a>
+            <p>
+              Es capaz de adaptarse a pantallas de diferentes tamaños con un
+              solo sitio web. El sistema detecta automáticamente el ancho de la
+              pantalla y a partir de ahí adapta todos los elementos de la
+              página, desde el tamaño de letra hasta las imágenes y los menús,
+              para ofrecer al usuario la mejor experiencia posible. ¡Parece
+              magia!
+            </p>
           </div>
         </div>
 
         {/* <!-- Approach --> */}
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Development Approach</h6>
+            <h6 className="m-0 font-weight-bold text-primary">
+              Aproximación de Desarrollo
+            </h6>
           </div>
           <div className="card-body">
-            <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-              CSS bloat and poor page performance. Custom CSS classes are used to create
-              custom components and custom utility classes.</p>
-            <p className="mb-0">Before working with this theme, you should become familiar with the
-              Bootstrap framework, especially the utility classes.</p>
+            <p>
+              Los sistemas tradicionales de costeo distribuyen los costos
+              indirectos en función de criterios de asignación que no miden
+              necesariamente el consumo de éstos, por ejemplo unidades de
+              producción, no reflejando así el costo real de los productos.
+            </p>
+            <p className="mb-0">
+              Se enfoca hacia la responsabilidad administrativa para los costos
+              dentro de las unidades.
+            </p>
           </div>
         </div>
-
       </div>
     </div>
   );
 }
-
 
 export default Row3;

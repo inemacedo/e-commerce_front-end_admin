@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { Routes, Route, Link, Navigate, useParams } from "react-router-dom";
 import { AiOutlineCheckCircle } from "react-icons/ai";
@@ -18,11 +18,22 @@ async function fetchData({ url, method, token, body }) {
 }
 
 function Orders() {
-  const { register, handleSubmit, getValues } = useForm();
+  const { register, handleSubmit } = useForm({
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+    defaultValues: {},
+    resolver: undefined,
+    context: undefined,
+    criteriaMode: "firstError",
+    shouldFocusError: true,
+    shouldUnregister: false,
+    shouldUseNativeValidation: true,
+    delayError: undefined,
+  });
 
   const user = useSelector((state) => state.user);
   const [orders, setOrders] = useState([]);
-
+  const [order, setOrder] = useState([]);
   useEffect(() => {
     const getOrders = async () => {
       const data = await fetchData({
@@ -36,8 +47,9 @@ function Orders() {
   }, []);
 
   const onSubmit = async (data) => {
+    console.log(orders);
     const response = await fetchData({
-      url: process.env.REACT_APP_API_URL + `/orders/1`,
+      url: process.env.REACT_APP_API_URL + `/orders/${orders.id}`,
       method: "PATCH",
       token: user.token,
       body: { data },
@@ -45,7 +57,6 @@ function Orders() {
     console.log(data);
     console.log(response);
   };
-
   // <!-- Page Heading -->
 
   return (
@@ -109,12 +120,11 @@ function Orders() {
                     <td>{item.totalPrice}</td>
                     <td>{item.paymentMethod}</td>
                     <td>
-                      <form
-                        onSubmit={handleSubmit(onSubmit)}
-                      >
-                        <select {...register("status")}
-                          className="form-control"
-                          >
+                      <form onSubmit={handleSubmit(onSubmit)}>
+                        <select
+                          defaultValue={item.status}
+                          {...register("status")}
+                        >
                           <option value="RECIBIDO">RECIBIDO</option>
                           <option value="ERROR">ERROR</option>
                           <option value="PAGADO">PAGADO</option>
@@ -122,15 +132,15 @@ function Orders() {
                           <option value="CANCELADO">CANCELADO</option>
                         </select>
 
-                        <button className="btn btn-primary btn-icon-split mt-1" type="submit" >
+                        <button
+                          className="btn btn-primary btn-icon-split mt-1"
+                          type="submit"
+                        >
                           <span className="icon">
                             <i className="fas fa-check"></i>
                           </span>
                           <span className="text">Actualizar</span>
                         </button>
-
-
-
                       </form>
                     </td>
                   </tr>

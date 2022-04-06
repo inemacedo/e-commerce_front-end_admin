@@ -57,7 +57,7 @@ function Products() {
   return (
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
-        <h1 className="h3 mb-2 text-gray-800">Products</h1>
+        <h1 className="h3 mb-2 text-gray-800">Productos</h1>
         <div className="toast-delete d-flex justify-content-center fixed-top">
           <ToastContainer
             style={{ transition: "all .15s" }}
@@ -78,7 +78,7 @@ function Products() {
             </Toast>
           </ToastContainer>
         </div>
-        <Link className="btn btn-primary" to="/products/new">
+        <Link className="btn btn-primary" to="/productos/crear">
           Crear nuevo Producto
         </Link>
       </div>
@@ -87,7 +87,7 @@ function Products() {
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
-            DataTables Example
+            Tabla de Productos
           </h6>
         </div>
         <div className="card-body">
@@ -100,26 +100,26 @@ function Products() {
             >
               <thead>
                 <tr>
-                  <th>id</th>
-                  <th>Name</th>
-                  <th>Price(USD)</th>
-                  <th>Category</th>
-                  <th>Description</th>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Precio(U$D)</th>
+                  <th>Categoría</th>
+                  <th>Descripción</th>
                   <th>Material</th>
-                  <th>Created At</th>
-                  <th>Actions</th>
+                  <th>Fecha de creación</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>id</th>
-                  <th>Name</th>
-                  <th>Price(USD)</th>
-                  <th>Category</th>
-                  <th>Description</th>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Precio(U$D)</th>
+                  <th>Categoría</th>
+                  <th>Descripción</th>
                   <th>Material</th>
-                  <th>Created At</th>
-                  <th>Actions</th>
+                  <th>Fecha de creación</th>
+                  <th>Acciones</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -139,7 +139,9 @@ function Products() {
                     <td>{format(parseISO(item.createdAt), "PP")}</td>
                     <td>
                       <EditButton
-                        onClick={() => navigate(`/products/edit/${item.slug}`)}
+                        onClick={() =>
+                          navigate(`/productos/editar/${item.slug}`)
+                        }
                       />
                       <DeleteButton onClick={() => handleDelete(item.id)} />
                     </td>

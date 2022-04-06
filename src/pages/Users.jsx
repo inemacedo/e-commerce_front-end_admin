@@ -77,7 +77,7 @@ function Users() {
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
-            DataTables Example
+            Tabla de usuarios
           </h6>
         </div>
         <div className="card-body">
@@ -98,7 +98,7 @@ function Users() {
                   <th>Acciones</th>
                 </tr>
               </thead>
-              <tfoot className={`${users.length >= 10 ? "" : "d-none"}`} >
+              <tfoot className={`${users.length >= 10 ? "" : "d-none"}`}>
                 <tr>
                   <th>id</th>
                   <th>Nombre</th>

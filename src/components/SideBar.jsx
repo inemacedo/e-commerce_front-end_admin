@@ -38,7 +38,7 @@ function SideBar() {
       <hr className="sidebar-divider" />
 
       {/*Heading*/}
-      <div className="sidebar-heading">Interface</div>
+      <div className="sidebar-heading">Interfaz</div>
 
       {/*Nav Item - Admin CRUD*/}
       <li
@@ -60,31 +60,31 @@ function SideBar() {
             : ""
         }`}
       >
-        <Link className="nav-link" to="/categories">
+        <Link className="nav-link" to="/categorias">
           <BiCategoryAlt />
           <span className="p-2">Categorías</span>
         </Link>
       </li>
 
       {/*Nav Item - Products*/}
-      <li className={`nav-item ${pathname === "/products" ? "active" : ""}`}>
-        <Link className="nav-link" to="/products">
+      <li className={`nav-item ${pathname === "/productos" ? "active" : ""}`}>
+        <Link className="nav-link" to="/productos">
           <RiProductHuntLine />
           <span className="p-2">Productos</span>
         </Link>
       </li>
 
       {/*Nav Item - Users*/}
-      <li className={`nav-item ${pathname === "/users" ? "active" : ""}`}>
-        <Link className="nav-link" to="/users">
+      <li className={`nav-item ${pathname === "/usuarios" ? "active" : ""}`}>
+        <Link className="nav-link" to="/usuarios">
           <FiUsers />
           <span className="p-2">Usuarios</span>
         </Link>
       </li>
 
       {/*Nav Item - Orders*/}
-      <li className={`nav-item ${pathname === "/orders" ? "active" : ""}`}>
-        <Link className="nav-link" to="/orders">
+      <li className={`nav-item ${pathname === "/pedidos" ? "active" : ""}`}>
+        <Link className="nav-link" to="/pedidos">
           <FiShoppingCart />
           <span className="p-2">Pedidos</span>
         </Link>

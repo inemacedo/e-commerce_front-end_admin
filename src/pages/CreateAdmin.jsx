@@ -42,10 +42,11 @@ function CreateAdmin() {
   return (
     <div className="container-fluid">
       <div className="toast-delete d-flex justify-content-center fixed-top">
-
         <ToastContainer
           style={{ transition: "all .15s" }}
-          className={`${showToast ? "opacity-1" : "opacity-0"} bg-dark rounded mt-3 p-0`}
+          className={`${
+            showToast ? "opacity-1" : "opacity-0"
+          } bg-dark rounded mt-3 p-0`}
           position="top-end"
         >
           <Toast
@@ -125,11 +126,14 @@ function CreateAdmin() {
                 />
               </div>
             </div>
-            <button className="btn btn-primary btn-icon-split mt-4" type="submit" >
+            <button
+              className="btn btn-primary btn-icon-split mt-4"
+              type="submit"
+            >
               <span className="icon text-white-50">
                 <i className="fas fa-check"></i>
               </span>
-              <span className="text">Create</span>
+              <span className="text">Crear</span>
             </button>
           </form>
         </div>

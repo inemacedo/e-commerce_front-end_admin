@@ -71,13 +71,13 @@ function Categories() {
               autohide
             >
               <Toast.Body className="text-dark">
-                <TiDeleteOutline color="red" size="18" /> Se eliminó una Categoría
-                correctamente
+                <TiDeleteOutline color="red" size="18" /> Se eliminó una
+                Categoría correctamente
               </Toast.Body>
             </Toast>
           </ToastContainer>
         </div>
-        <Link className="btn btn-primary" to="/categories/new">
+        <Link className="btn btn-primary" to="/categorias/crear">
           Crear nueva Categoria
         </Link>
       </div>
@@ -105,7 +105,7 @@ function Categories() {
                   <th>Acciones</th>
                 </tr>
               </thead>
-              <tfoot className={`${categories.length >= 10 ? "" : "d-none"}`} >
+              <tfoot className={`${categories.length >= 10 ? "" : "d-none"}`}>
                 <tr>
                   <th>id</th>
                   <th>Name</th>

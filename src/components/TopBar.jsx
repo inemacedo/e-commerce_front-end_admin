@@ -114,7 +114,7 @@ function TopBar() {
               <div>
                 <div className="small text-gray-500">December 12, 2019</div>
                 <span className="font-weight-bold">
-                  A new monthly report is ready to download!
+                  Un nuevo reporte mensual está pronto para descargar!
                 </span>
               </div>
             </a>

@@ -40,7 +40,7 @@ function CreateProduct() {
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
         <h1 className="h3 mb-2 text-gray-800">Nuevo Producto</h1>
-        <Link className="btn btn-dark" to="/products">
+        <Link className="btn btn-dark" to="/productos">
           Volver
         </Link>
       </div>
@@ -188,7 +188,7 @@ function CreateProduct() {
               <span className="icon text-white-50">
                 <i className="fas fa-check"></i>
               </span>
-              <span className="text">Create</span>
+              <span className="text">Crear Producto</span>
             </button>
           </form>
         </div>

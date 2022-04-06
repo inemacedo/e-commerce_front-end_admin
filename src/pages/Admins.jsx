@@ -17,7 +17,7 @@ async function fetchData({ url, method, token }) {
     },
   });
   const data = await response.json();
-  return { status: response.status , data };
+  return { status: response.status, data };
 }
 
 /* <Createadmin /> */
@@ -25,7 +25,7 @@ async function fetchData({ url, method, token }) {
 function Admins() {
   const user = useSelector((state) => state.user);
   const [admins, setAdmins] = useState([]);
-  const [showToast, setShowToast] = useState({show: false, info: ""});
+  const [showToast, setShowToast] = useState({ show: false, info: "" });
 
   const handleDelete = async (admin) => {
     const response = await fetchData({
@@ -33,9 +33,10 @@ function Admins() {
       method: "DELETE",
       token: user.token,
     });
-    if( response.status === 200 ){
-      setShowToast({show: true, info: admin.email });
-    }else {}
+    if (response.status === 200) {
+      setShowToast({ show: true, info: admin.email });
+    } else {
+    }
   };
 
   useEffect(() => {
@@ -60,12 +61,16 @@ function Admins() {
         <div className="toast-delete d-flex justify-content-center fixed-top">
           <ToastContainer
             style={{ transition: "all .15s" }}
-            className={`${showToast.show ? "opacity-1" : "opacity-0"} bg-dark rounded mt-3 p-0`}
+            className={`${
+              showToast.show ? "opacity-1" : "opacity-0"
+            } bg-dark rounded mt-3 p-0`}
             position="top-end"
           >
             <Toast
               className="bg-dark rounded"
-              onClose={() => setShowToast({show: false, info: showToast.info})}
+              onClose={() =>
+                setShowToast({ show: false, info: showToast.info })
+              }
               show={showToast.show}
               delay={5000}
               autohide
@@ -77,7 +82,7 @@ function Admins() {
             </Toast>
           </ToastContainer>
         </div>
-        <Link className="btn btn-primary" to="/admins/new">
+        <Link className="btn btn-primary" to="/admins/crear">
           Crear nuevo Admin
         </Link>
       </div>
@@ -105,7 +110,7 @@ function Admins() {
                   <th>Acciones</th>
                 </tr>
               </thead>
-              <tfoot className={`${admins.length>=10?"":"d-none"}`} >
+              <tfoot className={`${admins.length >= 10 ? "" : "d-none"}`}>
                 <tr>
                   <th>Nombre</th>
                   <th>Apellido</th>
@@ -114,22 +119,23 @@ function Admins() {
                 </tr>
               </tfoot>
               <tbody>
-                { console.log(admins) }
-                { admins && admins.map( admin => (
-                  <tr key={admin.id}>
-                    <td>{admin.firstname}</td>
-                    <td>{admin.lastname}</td>
-                    <td>{admin.email}</td>
-                    <td>
-                      <div className="d-flex" >
-                      <Link to={`/admins/edit/${admin.id}`} >
-                        <EditButton />
-                      </Link>
-                      <DeleteButton onClick={() => handleDelete(admin)} />
+                {console.log(admins)}
+                {admins &&
+                  admins.map((admin) => (
+                    <tr key={admin.id}>
+                      <td>{admin.firstname}</td>
+                      <td>{admin.lastname}</td>
+                      <td>{admin.email}</td>
+                      <td>
+                        <div className="d-flex">
+                          <Link to={`/admins/editar/${admin.id}`}>
+                            <EditButton />
+                          </Link>
+                          <DeleteButton onClick={() => handleDelete(admin)} />
                         </div>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

@@ -38,27 +38,24 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/admins/*" element={<Admins />} />
-            <Route path="/admins/new" element={<CreateAdmin />} />
-            <Route path="/admins/edit/:id" element={<EditAdmin />} />
-            <Route path="/categories/*" element={<Categories />} />
-            <Route path="/categories/new" element={<CreateCategory />} />
-            <Route path="/products/*" element={<Products />} />
-            <Route path="/products/new" element={<CreateProduct />} />
-            <Route path="/products/edit/:slug" element={<EditProduct />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/orders" element={<Orders />} />
+            <Route path="/admins/crear" element={<CreateAdmin />} />
+            <Route path="/admins/editar/:id" element={<EditAdmin />} />
+            <Route path="/categorias/*" element={<Categories />} />
+            <Route path="/categorias/crear" element={<CreateCategory />} />
+            <Route path="/productos/*" element={<Products />} />
+            <Route path="/productos/crear" element={<CreateProduct />} />
+            <Route path="/productos/editar/:slug" element={<EditProduct />} />
+            <Route path="/usuarios" element={<Users />} />
+            <Route path="/pedidos" element={<Orders />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
 
           <InfinityScroll action={setOnTop} />
-
         </div>
 
         {/* <!-- Footer --> */}
-        <footer
-          className="sticky-footer bg-white"
-        >
+        <footer className="sticky-footer bg-white">
           <div className="container my-auto">
             <div className="copyright text-center my-auto">
               <span>Copyright &copy; Your Website 2021</span>
@@ -71,8 +68,8 @@ function App() {
       {/* <!-- Scroll to Top Button--> */}
       <button
         className="scroll-to-top rounded border-0"
-        onClick={() =>{
-          window.scrollTo(0, 0)
+        onClick={() => {
+          window.scrollTo(0, 0);
           setTimeout(() => {
             setOnTop(true);
           }, 1000);
