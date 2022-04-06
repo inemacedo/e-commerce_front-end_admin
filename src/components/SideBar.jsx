@@ -30,7 +30,7 @@ function SideBar() {
       <li className={`nav-item ${pathname === "/" ? "active" : ""}`}>
         <Link className="nav-link" to="/">
           <AiOutlineDashboard />
-          <span className="p-2">Dashboard</span>
+          <span className="p-2">Resumen</span>
         </Link>
       </li>
 
@@ -48,7 +48,7 @@ function SideBar() {
       >
         <Link className="nav-link" to="/admins">
           <RiAdminLine />
-          <span className="p-2">Admins</span>
+          <span className="p-2">Administradores</span>
         </Link>
       </li>
 
@@ -62,7 +62,7 @@ function SideBar() {
       >
         <Link className="nav-link" to="/categories">
           <BiCategoryAlt />
-          <span className="p-2">Categories</span>
+          <span className="p-2">Categorías</span>
         </Link>
       </li>
 
@@ -70,7 +70,7 @@ function SideBar() {
       <li className={`nav-item ${pathname === "/products" ? "active" : ""}`}>
         <Link className="nav-link" to="/products">
           <RiProductHuntLine />
-          <span className="p-2">Products</span>
+          <span className="p-2">Productos</span>
         </Link>
       </li>
 
@@ -78,7 +78,7 @@ function SideBar() {
       <li className={`nav-item ${pathname === "/users" ? "active" : ""}`}>
         <Link className="nav-link" to="/users">
           <FiUsers />
-          <span className="p-2">Users</span>
+          <span className="p-2">Usuarios</span>
         </Link>
       </li>
 
@@ -92,11 +92,6 @@ function SideBar() {
 
       {/*Divider*/}
       <hr className="sidebar-divider d-none d-md-block" />
-
-      {/*Sidebar Toggler (Sidebar)*/}
-      <div className="text-center d-none d-md-inline">
-        <button className="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
 
       {/* End of Sidebar */}
     </ul>

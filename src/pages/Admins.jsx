@@ -56,7 +56,7 @@ function Admins() {
   return (
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
-        <h1 className="h3 mb-2 text-gray-800">Admins</h1>
+        <h1 className="h3 mb-2 text-gray-800">Administradores</h1>
         <div className="toast-delete d-flex justify-content-center fixed-top">
           <ToastContainer
             style={{ transition: "all .15s" }}
@@ -86,7 +86,7 @@ function Admins() {
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
-            DataTables Example
+            Lista de administradores
           </h6>
         </div>
         <div className="card-body">
@@ -99,18 +99,18 @@ function Admins() {
             >
               <thead>
                 <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
                   <th>Email</th>
-                  <th>Actions</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
-              <tfoot>
+              <tfoot className={`${admins.length>=10?"":"d-none"}`} >
                 <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
                   <th>Email</th>
-                  <th>Actions</th>
+                  <th>Acciones</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -121,10 +121,12 @@ function Admins() {
                     <td>{admin.lastname}</td>
                     <td>{admin.email}</td>
                     <td>
+                      <div className="d-flex" >
                       <Link to={`/admins/edit/${admin.id}`} >
                         <EditButton />
                       </Link>
                       <DeleteButton onClick={() => handleDelete(admin)} />
+                        </div>
                     </td>
                   </tr>
                 ))}

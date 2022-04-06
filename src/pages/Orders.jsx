@@ -15,7 +15,8 @@ async function fetchData({ url, method, token }) {
   return data;
 }
 
-function ShowOrders() {
+function Orders() {
+
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => console.log(data);
 
@@ -81,18 +82,15 @@ function ShowOrders() {
               </thead>
 
               <tbody>
+                {console.log(orders)}
                 {orders.map((item) => (
-                  <tr key={1}>
-                    {console.log(item)}
+                  <tr key={item.id}>
                     <td>{item.id}</td>
+                    <td>{item.user.firstname + " " + item.user.lastname}</td>
                     <td>
-                      {users[item.userId].firstname}{" "}
-                      {users[item.userId].lastname}
-                    </td>
-                    <td>
-                      {" "}
-                      <form action="">
+                      <form className="">
                         <select
+                          className="form-control"
                           defaultValue={item.status}
                           {...register("status")}
                         >
@@ -102,6 +100,12 @@ function ShowOrders() {
                           <option value="ENVIADO">ENVIADO</option>
                           <option value="CANCELADO">CANCELADO</option>
                         </select>
+                        <button className="btn btn-primary btn-icon-split mt-1" type="submit" >
+                          <span className="icon ">
+                            <i className="fas fa-check"></i>
+                          </span>
+                          <span className="text">Actualizar</span>
+                        </button>
                       </form>
                     </td>
                     <td>{item.address}</td>
@@ -109,7 +113,7 @@ function ShowOrders() {
                       {
                         <ul key={item.id}>
                           {item.products.map((product) => (
-                            <li key={product.id}>
+                            <li key={product.slug}>
                               {product.title} {product.quantity} {product.price}
                             </li>
                           ))}
@@ -134,14 +138,5 @@ function ShowOrders() {
   );
 }
 
-function Orders(params) {
-  return (
-    <div>
-      <Routes>
-        <Route path="/" element={<ShowOrders />} />
-      </Routes>
-    </div>
-  );
-}
 
 export default Orders;

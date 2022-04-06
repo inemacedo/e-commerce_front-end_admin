@@ -125,7 +125,7 @@ function ChartRow() {
   /* <!-- Content Row --> */
   /* <!-- Area Chart --> */
 
-  return (<div className="d-none d-md-block">
+  return (<div className="d-none d-sm-block col-12 col-xl-7">
     <div className="card shadow mb-4">
       {/* <!-- Card Header - Dropdown --> */}
       <div

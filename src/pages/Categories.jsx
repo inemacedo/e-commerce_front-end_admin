@@ -56,7 +56,7 @@ function Categories() {
   return (
     <div className="container-fluid">
       <div className="d-flex align-items-start justify-content-between my-4">
-        <h1 className="h3 mb-2 text-gray-800">Categories</h1>
+        <h1 className="h3 mb-2 text-gray-800">Categorías</h1>
         <div className="toast-delete d-flex justify-content-center fixed-top">
           <ToastContainer
             style={{ transition: "all .15s" }}
@@ -71,7 +71,7 @@ function Categories() {
               autohide
             >
               <Toast.Body className="text-dark">
-                <TiDeleteOutline color="red" size="18" /> Se elimino Categoría
+                <TiDeleteOutline color="red" size="18" /> Se eliminó una Categoría
                 correctamente
               </Toast.Body>
             </Toast>
@@ -86,7 +86,7 @@ function Categories() {
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
-            DataTables Example
+            Lista de categorías
           </h6>
         </div>
         <div className="card-body">
@@ -100,17 +100,17 @@ function Categories() {
               <thead>
                 <tr>
                   <th>id</th>
-                  <th>Name</th>
-                  <th>Created At</th>
-                  <th>Actions</th>
+                  <th>Nombre</th>
+                  <th>Fecha de creación</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
-              <tfoot>
+              <tfoot className={`${categories.length >= 10 ? "" : "d-none"}`} >
                 <tr>
                   <th>id</th>
                   <th>Name</th>
-                  <th>Created At</th>
-                  <th>Actions</th>
+                  <th>Fecha de creación</th>
+                  <th>Acciones</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -120,8 +120,10 @@ function Categories() {
                     <td>{item.name}</td>
                     <td>{format(parseISO(item.createdAt), "PP")}</td>
                     <td>
-                      <EditButton />
-                      <DeleteButton onClick={() => handleDelete(item.id)} />
+                      <div className="d-flex">
+                        <EditButton />
+                        <DeleteButton onClick={() => handleDelete(item.id)} />
+                      </div>
                     </td>
                   </tr>
                 ))}

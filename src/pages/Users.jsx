@@ -50,27 +50,29 @@ function Users() {
 
   return (
     <div className="container-fluid">
-      <h1 className="h3 mb-2 text-gray-800">Users</h1>
-      {/* <!-- DataTales Example --> */}
-      <div className="toast-delete d-flex justify-content-center">
-        <ToastContainer
-          style={{ transition: "all .15s" }}
-          className={`${show ? "opacity-1" : "opacity-0"} bg-white m-2 p-0`}
-          position="top-end"
-        >
-          <Toast
-            className="bg-"
-            onClose={() => setShow(false)}
-            show={show}
-            delay={5000}
-            autohide
+      <div className="d-flex align-items-start justify-content-between my-4">
+        <h1 className="h3 mb-2 text-gray-800">Usuarios</h1>
+        {/* <!-- DataTales Example --> */}
+        <div className="toast-delete d-flex justify-content-center">
+          <ToastContainer
+            style={{ transition: "all .15s" }}
+            className={`${show ? "opacity-1" : "opacity-0"} bg-white m-2 p-0`}
+            position="top-end"
           >
-            <Toast.Body className="text-dark">
-              <TiDeleteOutline color="red" size="18" /> Se elimino Usuario
-              correctamente
-            </Toast.Body>
-          </Toast>
-        </ToastContainer>
+            <Toast
+              className="bg-"
+              onClose={() => setShow(false)}
+              show={show}
+              delay={5000}
+              autohide
+            >
+              <Toast.Body className="text-dark">
+                <TiDeleteOutline color="red" size="18" /> Se elimino Usuario
+                correctamente
+              </Toast.Body>
+            </Toast>
+          </ToastContainer>
+        </div>
       </div>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
@@ -89,21 +91,21 @@ function Users() {
               <thead>
                 <tr>
                   <th>id</th>
-                  <th>Name</th>
-                  <th>Lastname</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
                   <th>Email</th>
-                  <th>Created At</th>
-                  <th>Actions</th>
+                  <th>Fecha de creación</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
-              <tfoot>
+              <tfoot className={`${users.length >= 10 ? "" : "d-none"}`} >
                 <tr>
                   <th>id</th>
-                  <th>Name</th>
-                  <th>Lastname</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
                   <th>Email</th>
-                  <th>Created At</th>
-                  <th>Actions</th>
+                  <th>Fecha de creación</th>
+                  <th>Acciones</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -115,8 +117,10 @@ function Users() {
                     <td>{user.email}</td>
                     <td>{user.createdAt}</td>
                     <td>
-                      <EditButton />
-                      <DeleteButton onClick={() => handleDelete(user.id)} />
+                      <div className="d-flex">
+                        <EditButton />
+                        <DeleteButton onClick={() => handleDelete(user.id)} />
+                      </div>
                     </td>
                   </tr>
                 ))}

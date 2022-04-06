@@ -14,13 +14,15 @@ function Home() {
         <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
         <Link className="btn btn-primary" to="">
           <BsDownload />
-          <span className="p-2">Generate Report</span>
+          <span className="p-2">Generar Reporte</span>
         </Link>
       </div>
 
       {/* <!-- Content Row --> */}
-      <ContentRow />
-      <Row2 />
+      <div className="row">
+        <ContentRow />
+        <Row2 />
+      </div>
       <Row3 />
     </div>
   );
