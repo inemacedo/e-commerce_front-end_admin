@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import "../css/index.css";
+import { useState } from "react";
+import { ToastContainer, Toast } from "react-bootstrap";
 
 async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
@@ -13,27 +15,56 @@ async function fetchData({ url, method, token, body }) {
     body: JSON.stringify(body),
   });
   const data = await response.json();
-  return data;
+  return {status: response.status, data};
 }
 
 function CreateCategory() {
   const user = useSelector((state) => state.user);
+  const [showToast, setShowToast] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = async (data) => {
-    await fetchData({
-      url: process.env.REACT_APP_API_URL + "/categories",
-      method: "POST",
-      token: user.token,
-      body: data,
-    });
+    try {
+      const response = await fetchData({
+        url: process.env.REACT_APP_API_URL + "/categories",
+        method: "POST",
+        token: user.token,
+        body: data,
+      });
+      if(response.status){
+        setShowToast(true);
+      }
+    } catch (error) {
+      
+    }
   }; // your form submit function which will invoke after successful validation
 
   return (
     <div className="container-fluid">
+      <div className="toast-delete d-flex justify-content-center fixed-top">
+          <ToastContainer
+            style={{ transition: "all .15s" }}
+            className={`${showToast.show ? "opacity-1" : "opacity-0"} bg-dark rounded mt-3 p-0`}
+            position="top-end"
+          >
+            <Toast
+              className="bg-dark rounded"
+              onClose={() => setShowToast(false)}
+              show={showToast}
+              delay={5000}
+              autohide
+            >
+              <Toast.Body className="text-light">
+                Se ha creado una categoría correctamente
+              </Toast.Body>
+            </Toast>
+          </ToastContainer>
+        </div>
       <div className="d-flex align-items-start justify-content-between my-4">
         <h1 className="h3 mb-2 text-gray-800">Nueva Categoría</h1>
         <Link className="btn btn-dark" to="/categories">

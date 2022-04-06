@@ -26,7 +26,18 @@ function EditAdmin() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+    defaultValues: {},
+    resolver: undefined,
+    context: undefined,
+    criteriaMode: "firstError",
+    shouldFocusError: true,
+    shouldUnregister: false,
+    shouldUseNativeValidation: true,
+    delayError: undefined
+  });
 
   useEffect(() => {
     const getAdmin = async () => {
@@ -43,13 +54,14 @@ function EditAdmin() {
 
   const onSubmit = async (data) => {
     await fetchData({
-      url: process.env.REACT_APP_API_URL + `/products/${id}`,
+      url: process.env.REACT_APP_API_URL + `/products/${product.id}`,
       method: "PATCH",
       token: user.token,
       body: data,
     });
     console.log(data);
-  }; // your form submit function which will invoke after successful validation
+  };
+  // your form submit function which will invoke after successful validation
   //   console.log(watch("title"));
 
   return (
@@ -79,9 +91,9 @@ function EditAdmin() {
                     required: "Este campo es obligatorio",
                   })}
                 />
-                {/* {errors.title && (
-                  <p className="text-warning">{errors.title.message}</p>
-                )} */}
+                {errors.title && (
+                  <p className="text-danger">{errors.title.message}</p>
+                )}
                 <label className="mt-2 mb-0" htmlFor="">
                   Precio
                 </label>
@@ -93,9 +105,9 @@ function EditAdmin() {
                     required: "Este campo es obligatorio",
                   })}
                 />
-                {/* {errors.price && (
-                  <p className="text-warning">{errors.price.message}</p>
-                )} */}
+                {errors.price && (
+                  <p className="text-danger">{errors.price.message}</p>
+                )}
                 <label className="mt-2 mb-0" htmlFor="">
                   Descripción
                 </label>
@@ -103,18 +115,28 @@ function EditAdmin() {
                   className="form-control form-control-lg"
                   type="text"
                   defaultValue={product.description}
-                  {...register("description")}
+                  {...register("description", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
+                {errors.description && (
+                  <p className="text-danger">{errors.description.message}</p>
+                )}
 
                 <label className="mt-2 mb-0" htmlFor="">
                   Medidas
                 </label>
                 <input
                   className="form-control form-control-lg"
-                  type="measures"
+                  type="text"
                   defaultValue={product.measures}
-                  {...register("measures")}
+                  {...register("measures", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
+                {errors.measures && (
+                  <p className="text-danger">{errors.measures.message}</p>
+                )}
                 <label className="mt-2 mb-0" htmlFor="">
                   Material
                 </label>
@@ -122,8 +144,13 @@ function EditAdmin() {
                   className="form-control form-control-lg"
                   type="text"
                   defaultValue={product.material}
-                  {...register("material")}
+                  {...register("material", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
+                {errors.material && (
+                  <p className="text-danger">{errors.material.message}</p>
+                )}
                 <label className="mt-2 mb-0" htmlFor="">
                   Estilo
                 </label>
@@ -131,8 +158,13 @@ function EditAdmin() {
                   className="form-control form-control-lg"
                   type="text"
                   defaultValue={product.style}
-                  {...register("style")}
+                  {...register("style", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
+                {errors.style && (
+                  <p className="text-danger">{errors.style.message}</p>
+                )}
                 <label className="mt-2 mb-0" htmlFor="">
                   Ambiente
                 </label>
@@ -140,8 +172,13 @@ function EditAdmin() {
                   className="form-control form-control-lg"
                   type="text"
                   defaultValue={product.environment}
-                  {...register("environment")}
+                  {...register("environment", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
+                {errors.environment && (
+                  <p className="text-danger">{errors.environment.message}</p>
+                )}
               </div>
 
               <div className="col-md-12 col-lg-6">
@@ -152,28 +189,41 @@ function EditAdmin() {
                   className="form-control form-control-lg"
                   type="number"
                   defaultValue={product.stock}
-                  {...register("stock")}
+                  {...register("stock", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
+                {errors.stock && (
+                  <p className="text-danger">{errors.stock.message}</p>
+                )}
                 <label className="mt-2 mb-0" htmlFor="">
                   Categoría
                 </label>
                 <select
                   className="form-control form-control-lg"
-                  {...register("categoryId")}
+                  defaultValue={product.categoryId}
+                  {...register("categoryId", {
+                    required: "Este campo es obligatorio",
+                  })}
                 >
                   <option value="1">mesas</option>
                   <option value="2">sillas</option>
                   <option value="3">sillones</option>
                 </select>
+                {errors.categoryId && (
+                  <p className="text-danger">{errors.categoryId.message}</p>
+                )}
                 <label className="mt-2 mb-0" htmlFor="">
                   Destacado
                 </label>
                 <select
                   className="form-control form-control-lg"
-                  {...register("featured")}
+                  {...register("featured", {
+                    required: "Este campo es obligatorio",
+                  })}
                 >
-                  <option value="true">Si</option>
                   <option value="false">No</option>
+                  <option value="true">Si</option>
                 </select>
                 {/* <label className="mt-2 mb-0" htmlFor="">
                   Imagen Principal

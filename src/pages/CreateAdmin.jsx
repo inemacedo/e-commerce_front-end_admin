@@ -1,6 +1,8 @@
-import { useSelector } from "react-redux";
+import { useSelector, useStore } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, Toast } from "react-bootstrap";
+import { useState } from "react";
 
 async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
@@ -12,12 +14,13 @@ async function fetchData({ url, method, token, body }) {
     body: JSON.stringify(body),
   });
   const data = await response.json();
-  return data;
+  return { status: response.status, data };
 }
 
 function CreateAdmin() {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false);
 
   const {
     register,
@@ -25,16 +28,40 @@ function CreateAdmin() {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    await fetchData({
+    const response = await fetchData({
       url: process.env.REACT_APP_API_URL + "/admins",
       method: "POST",
       token: user.token,
       body: data,
     });
+    if (response.status === 200) {
+      setShowToast(true);
+    }
   };
 
   return (
     <div className="container-fluid">
+      <div className="toast-delete d-flex justify-content-center fixed-top">
+
+        <ToastContainer
+          style={{ transition: "all .15s" }}
+          className={`${showToast ? "opacity-1" : "opacity-0"} bg-dark rounded mt-3 p-0`}
+          position="top-end"
+        >
+          <Toast
+            className="bg-dark rounded"
+            onClose={() => setShowToast(false)}
+            show={showToast}
+            delay={5000}
+            autohide
+          >
+            <Toast.Body className="text-light">
+              Se ha creado un Admin correctamente
+            </Toast.Body>
+          </Toast>
+        </ToastContainer>
+      </div>
+
       <div className="d-flex align-items-start justify-content-between my-4">
         <h1 className="h3 mb-2 text-gray-800">Nuevo Administrador</h1>
         <Link className="btn btn-dark" to="/admins">
@@ -67,7 +94,7 @@ function CreateAdmin() {
                   Apellido
                 </label>
                 <input
-                  className="input-file form-control form-control-lg"
+                  className="form-control form-control-lg"
                   type="text"
                   {...register("lastname", {
                     required: "Este campo es obligatorio",
@@ -80,7 +107,7 @@ function CreateAdmin() {
                   Email
                 </label>
                 <input
-                  className="input-file form-control form-control-lg"
+                  className="form-control form-control-lg"
                   type="email"
                   {...register("email", {
                     required: "Este campo es obligatorio",
@@ -90,7 +117,7 @@ function CreateAdmin() {
                   Password
                 </label>
                 <input
-                  className="input-file form-control form-control-lg"
+                  className="form-control form-control-lg"
                   type="text"
                   {...register("password", {
                     required: "Este campo es obligatorio",
@@ -98,7 +125,7 @@ function CreateAdmin() {
                 />
               </div>
             </div>
-            <button className="btn btn-primary btn-icon-split mt-4">
+            <button className="btn btn-primary btn-icon-split mt-4" type="submit" >
               <span className="icon text-white-50">
                 <i className="fas fa-check"></i>
               </span>

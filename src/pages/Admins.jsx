@@ -17,7 +17,7 @@ async function fetchData({ url, method, token }) {
     },
   });
   const data = await response.json();
-  return data;
+  return { status: response.status , data };
 }
 
 /* <Createadmin /> */
@@ -25,34 +25,31 @@ async function fetchData({ url, method, token }) {
 function Admins() {
   const user = useSelector((state) => state.user);
   const [admins, setAdmins] = useState([]);
-  const navigate = useNavigate();
+  const [showToast, setShowToast] = useState({show: false, info: ""});
 
-  const [show, setShow] = useState(false);
-
-  const handleDelete = async (adminId) => {
-    setShow(true);
-    await fetchData({
-      url: process.env.REACT_APP_API_URL + `/admins/${adminId}`,
+  const handleDelete = async (admin) => {
+    const response = await fetchData({
+      url: process.env.REACT_APP_API_URL + `/admins/${admin.id}`,
       method: "DELETE",
       token: user.token,
     });
-    setAdmins((prevAdmins) =>
-      prevAdmins.filter((admin) => admin.id !== adminId)
-    );
+    if( response.status === 200 ){
+      setShowToast({show: true, info: admin.email });
+    }else {}
   };
 
   useEffect(() => {
     const getAdmins = async () => {
-      const data = await fetchData({
+      const response = await fetchData({
         url: process.env.REACT_APP_API_URL + "/admins",
         method: "GET",
         token: user.token,
       });
 
-      setAdmins(data);
+      setAdmins(response.data);
     };
     getAdmins();
-  }, []);
+  }, [showToast]);
 
   // <!-- Page Heading -->
 
@@ -63,19 +60,19 @@ function Admins() {
         <div className="toast-delete d-flex justify-content-center fixed-top">
           <ToastContainer
             style={{ transition: "all .15s" }}
-            className={`${show ? "opacity-1" : "opacity-0"} bg-white m-2 p-0`}
+            className={`${showToast.show ? "opacity-1" : "opacity-0"} bg-dark rounded mt-3 p-0`}
             position="top-end"
           >
             <Toast
-              className="bg-"
-              onClose={() => setShow(false)}
-              show={show}
+              className="bg-dark rounded"
+              onClose={() => setShowToast({show: false, info: showToast.info})}
+              show={showToast.show}
               delay={5000}
               autohide
             >
-              <Toast.Body className="text-dark">
-                <TiDeleteOutline color="red" size="18" /> Se elimino
-                Administrador correctamente
+              <Toast.Body className="text-light">
+                <TiDeleteOutline color="red" size="18" />
+                Se eliminó {showToast.info} correctamente
               </Toast.Body>
             </Toast>
           </ToastContainer>
@@ -117,16 +114,17 @@ function Admins() {
                 </tr>
               </tfoot>
               <tbody>
-                {admins.map((admin) => (
-                  <tr key={1}>
+                { console.log(admins) }
+                { admins && admins.map( admin => (
+                  <tr key={admin.id}>
                     <td>{admin.firstname}</td>
                     <td>{admin.lastname}</td>
                     <td>{admin.email}</td>
                     <td>
-                      <EditButton
-                        onClick={() => navigate(`/admins/edit/${admin.id}`)}
-                      />
-                      <DeleteButton onClick={() => handleDelete(admin.id)} />
+                      <Link to={`/admins/edit/${admin.id}`} >
+                        <EditButton />
+                      </Link>
+                      <DeleteButton onClick={() => handleDelete(admin)} />
                     </td>
                   </tr>
                 ))}
