@@ -13,6 +13,7 @@ import Products from "./pages/Products";
 import Profile from "./pages/Profile";
 import SideBar from "./components/SideBar";
 import TopBar from "./components/TopBar";
+import InfinityScroll from "./components/utils/InfinityScroll";
 import Page404 from "./pages/Page404";
 import CreateProduct from "./pages/CreateProduct";
 import CreateCategory from "./pages/CreateCategory";
@@ -49,12 +50,14 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
+
+          <InfinityScroll action={setOnTop} />
+
         </div>
 
         {/* <!-- Footer --> */}
         <footer
           className="sticky-footer bg-white"
-          onClick={() => setOnTop((prev) => !prev)}
         >
           <div className="container my-auto">
             <div className="copyright text-center my-auto">
@@ -68,7 +71,12 @@ function App() {
       {/* <!-- Scroll to Top Button--> */}
       <button
         className="scroll-to-top rounded border-0"
-        onClick={() => window.scrollTo(0, 0)}
+        onClick={() =>{
+          window.scrollTo(0, 0)
+          setTimeout(() => {
+            setOnTop(true);
+          }, 1000);
+        }}
         style={{ display: onTop ? "none" : "inline" }}
       >
         <i className="fas fa-angle-up"></i>
