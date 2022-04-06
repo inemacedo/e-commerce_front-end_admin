@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useParams } from "react-router-dom";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
-async function fetchData({ url, method, token }) {
+async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
     method: method,
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
+      body: JSON.stringify(body),
     },
   });
   const data = await response.json();
@@ -16,24 +18,18 @@ async function fetchData({ url, method, token }) {
 }
 
 function Orders() {
+<<<<<<< HEAD
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => console.log(data);
+=======
+  const { register, handleSubmit, getValues } = useForm();
+>>>>>>> dd9c31fed43e1955d16dd97bf378e1806a43f940
 
   const user = useSelector((state) => state.user);
   const [orders, setOrders] = useState([]);
-  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const getUsers = async () => {
-      const data = await fetchData({
-        url: process.env.REACT_APP_API_URL + "/users",
-        method: "GET",
-        token: user.token,
-      });
-      setUsers(data);
-    };
-    getUsers();
     const getOrders = async () => {
       const data = await fetchData({
         url: process.env.REACT_APP_API_URL + "/orders",
@@ -44,6 +40,17 @@ function Orders() {
     };
     getOrders();
   }, []);
+
+  const onSubmit = async (data) => {
+    const response = await fetchData({
+      url: process.env.REACT_APP_API_URL + `/orders/1`,
+      method: "PATCH",
+      token: user.token,
+      body: { data },
+    });
+    console.log(data);
+    console.log(response);
+  };
 
   // <!-- Page Heading -->
 
@@ -71,13 +78,15 @@ function Orders() {
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Propiedad</th>
-                  <th>Estado</th>
+                  <th>Cliente</th>
+                  <th>E-mail</th>
+                  <th>Teléfono</th>
+
                   <th>Dirección</th>
                   <th>Productos</th>
-                  <th>Precio (U$D) </th>
+                  <th>Precio Total (U$D) </th>
                   <th>Forma de pago</th>
-                  <th>Acción </th>
+                  <th>Estado</th>
                 </tr>
               </thead>
 
@@ -88,6 +97,7 @@ function Orders() {
                     <td>{item.id}</td>
                     <td>{item.user.firstname + " " + item.user.lastname}</td>
                     <td>
+<<<<<<< HEAD
                       <form className="">
                         <select
                           className="form-control"
@@ -107,14 +117,25 @@ function Orders() {
                           <span className="text">Actualizar</span>
                         </button>
                       </form>
+=======
+                      {item.user.firstname} {item.user.lastname}
+>>>>>>> dd9c31fed43e1955d16dd97bf378e1806a43f940
                     </td>
+                    <td>{item.user.email}</td>
+                    <td>{item.user.phone}</td>
+
                     <td>{item.address}</td>
                     <td>
                       {
                         <ul key={item.id}>
                           {item.products.map((product) => (
+<<<<<<< HEAD
                             <li key={product.slug}>
                               {product.title} {product.quantity} {product.price}
+=======
+                            <li key={product.id}>
+                              {product.title} {product.quantity}
+>>>>>>> dd9c31fed43e1955d16dd97bf378e1806a43f940
                             </li>
                           ))}
                         </ul>
@@ -123,9 +144,25 @@ function Orders() {
                     <td>{item.totalPrice}</td>
                     <td>{item.paymentMethod}</td>
                     <td>
-                      <button className="btn btn-sm btn-danger btn-circle">
-                        <i className="fas fa-trash"></i>
-                      </button>
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="d-flex flex-row"
+                        action=""
+                      >
+                        <select {...register("status")}>
+                          <option value="RECIBIDO">RECIBIDO</option>
+                          <option value="ERROR">ERROR</option>
+                          <option value="PAGADO">PAGADO</option>
+                          <option value="ENVIADO">ENVIADO</option>
+                          <option value="CANCELADO">CANCELADO</option>
+                        </select>
+
+                        {
+                          <button type="submit">
+                            <AiOutlineCheckCircle color="blue" size={32} />
+                          </button>
+                        }
+                      </form>
                     </td>
                   </tr>
                 ))}
@@ -138,5 +175,8 @@ function Orders() {
   );
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dd9c31fed43e1955d16dd97bf378e1806a43f940
 export default Orders;
