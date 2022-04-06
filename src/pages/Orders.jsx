@@ -10,8 +10,8 @@ async function fetchData({ url, method, token, body }) {
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
-      body: JSON.stringify(body),
     },
+    body: JSON.stringify(body),
   });
   const data = await response.json();
   return data;
@@ -37,7 +37,7 @@ function Orders() {
   useEffect(() => {
     const getOrders = async () => {
       const data = await fetchData({
-        url: process.env.REACT_APP_API_URL + "/orders",
+        url: process.env.REACT_APP_API_URL + "/orders/",
         method: "GET",
         token: user.token,
       });
@@ -49,10 +49,10 @@ function Orders() {
   const onSubmit = async (data) => {
     console.log(orders);
     const response = await fetchData({
-      url: process.env.REACT_APP_API_URL + `/orders/${orders.id}`,
+      url: process.env.REACT_APP_API_URL + "/orders/" + data.orderId,
       method: "PATCH",
       token: user.token,
-      body: { data },
+      body: data,
     });
     console.log(data);
     console.log(response);
@@ -120,28 +120,37 @@ function Orders() {
                     <td>{item.totalPrice}</td>
                     <td>{item.paymentMethod}</td>
                     <td>
-                      <form onSubmit={handleSubmit(onSubmit)}>
-                        <select
-                          defaultValue={item.status}
-                          {...register("status")}
-                        >
-                          <option value="RECIBIDO">RECIBIDO</option>
-                          <option value="ERROR">ERROR</option>
-                          <option value="PAGADO">PAGADO</option>
-                          <option value="ENVIADO">ENVIADO</option>
-                          <option value="CANCELADO">CANCELADO</option>
-                        </select>
+                      <p>{item.status}</p>
+                      {item.status && (
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                          <select
+                            {...register("status")}
+                            defaultValue={item.status}
+                          >
+                            <option value="RECIBIDO">RECIBIDO</option>
+                            <option value="ERROR">ERROR</option>
+                            <option value="PAGADO">PAGADO</option>
+                            <option value="ENVIADO">ENVIADO</option>
+                            <option value="CANCELADO">CANCELADO</option>
+                          </select>
 
-                        <button
-                          className="btn btn-primary btn-icon-split mt-1"
-                          type="submit"
-                        >
-                          <span className="icon">
-                            <i className="fas fa-check"></i>
-                          </span>
-                          <span className="text">Actualizar</span>
-                        </button>
-                      </form>
+                          <button
+                            className="btn btn-primary btn-icon-split mt-1"
+                            type="submit"
+                          >
+                            <span className="icon">
+                              <i className="fas fa-check"></i>
+                            </span>
+                            <input
+                              {...register("orderId")}
+                              className="d-none"
+                              defaultValue={item.id}
+                              type="text"
+                            />
+                            <span className="text">Actualizar</span>
+                          </button>
+                        </form>
+                      )}
                     </td>
                   </tr>
                 ))}

@@ -63,85 +63,87 @@ function EditAdmin() {
           <h6 className="m-0 font-weight-bold text-primary">Detalles</h6>
         </div>
         <div className="card-body">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="row">
-              <div className="col-md-12 col-lg-6">
-                <label className="mt-2 mb-0" htmlFor="">
-                  Nombre
-                </label>
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  defaultValue={admin.firstname}
-                  {...register("firstname", {
-                    required: "Este campo es obligatorio",
-                  })}
-                />
-                {errors.name && (
-                  <p className="text-warning">{errors.firstname.message}</p>
-                )}
-                <label className="mt-2 mb-0" htmlFor="">
-                  Apellido
-                </label>
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  defaultValue={admin.lastname}
-                  {...register("lastname", {
-                    required: "Este campo es obligatorio",
-                  })}
-                />
-                {errors.name && (
-                  <p className="text-warning">{errors.lastname.message}</p>
-                )}
-                <label className="mt-2 mb-0" htmlFor="">
-                  Email
-                </label>
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  defaultValue={admin.email}
-                  {...register("email", {
-                    required: "Este campo es obligatorio",
-                  })}
-                />
-                {errors.name && (
-                  <p className="text-warning">{errors.email.message}</p>
-                )}
-                <label className="mt-2 mb-0" htmlFor="">
-                  Password
-                </label>
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  defaultValue={admin.passsword}
-                  {...register("passsword", {
-                    required: "Este campo es obligatorio",
-                  })}
-                />
-                {errors.name && (
-                  <p className="text-warning">{errors.passsword.message}</p>
-                )}
-                <label className="mt-2 mb-0" htmlFor="">
-                  Imagen
-                </label>
-                {/* <input
+          {admin && (
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="row">
+                <div className="col-md-12 col-lg-6">
+                  <label className="mt-2 mb-0" htmlFor="">
+                    Nombre
+                  </label>
+                  <input
+                    className="form-control form-control-lg"
+                    type="text"
+                    defaultValue={admin.firstname}
+                    {...register("firstname", {
+                      required: "Este campo es obligatorio",
+                    })}
+                  />
+                  {errors.name && (
+                    <p className="text-warning">{errors.firstname.message}</p>
+                  )}
+                  <label className="mt-2 mb-0" htmlFor="">
+                    Apellido
+                  </label>
+                  <input
+                    className="form-control form-control-lg"
+                    type="text"
+                    defaultValue={admin.lastname}
+                    {...register("lastname", {
+                      required: "Este campo es obligatorio",
+                    })}
+                  />
+                  {errors.name && (
+                    <p className="text-warning">{errors.lastname.message}</p>
+                  )}
+                  <label className="mt-2 mb-0" htmlFor="">
+                    Email
+                  </label>
+                  <input
+                    className="form-control form-control-lg"
+                    type="text"
+                    defaultValue={admin.email}
+                    {...register("email", {
+                      required: "Este campo es obligatorio",
+                    })}
+                  />
+                  {errors.name && (
+                    <p className="text-warning">{errors.email.message}</p>
+                  )}
+                  <label className="mt-2 mb-0" htmlFor="">
+                    Password
+                  </label>
+                  <input
+                    className="form-control form-control-lg"
+                    type="text"
+                    defaultValue={admin.passsword}
+                    {...register("passsword", {
+                      required: "Este campo es obligatorio",
+                    })}
+                  />
+                  {errors.name && (
+                    <p className="text-warning">{errors.passsword.message}</p>
+                  )}
+                  <label className="mt-2 mb-0" htmlFor="">
+                    Imagen
+                  </label>
+                  {/* <input
                   className="input-file form-control form-control-lg"
                   type="file"
                   {...register("image")}
                 /> */}
+                </div>
               </div>
-            </div>
-            <button
-              className="btn btn-primary btn-icon-split mt-4"
-              type="submit"
-            >
-              <span className="icon text-white-50">
-                <i className="fas fa-check"></i>
-              </span>
-              <span className="text">Guardar</span>
-            </button>
-          </form>
+              <button
+                className="btn btn-primary btn-icon-split mt-4"
+                type="submit"
+              >
+                <span className="icon text-white-50">
+                  <i className="fas fa-check"></i>
+                </span>
+                <span className="text">Guardar</span>
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </div>
