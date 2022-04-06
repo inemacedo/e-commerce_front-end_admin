@@ -18,13 +18,7 @@ async function fetchData({ url, method, token, body }) {
 }
 
 function Orders() {
-<<<<<<< HEAD
-
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
-=======
   const { register, handleSubmit, getValues } = useForm();
->>>>>>> dd9c31fed43e1955d16dd97bf378e1806a43f940
 
   const user = useSelector((state) => state.user);
   const [orders, setOrders] = useState([]);
@@ -97,29 +91,7 @@ function Orders() {
                     <td>{item.id}</td>
                     <td>{item.user.firstname + " " + item.user.lastname}</td>
                     <td>
-<<<<<<< HEAD
-                      <form className="">
-                        <select
-                          className="form-control"
-                          defaultValue={item.status}
-                          {...register("status")}
-                        >
-                          <option value="RECIBIDO">RECIBIDO</option>
-                          <option value="ERROR">ERROR</option>
-                          <option value="PAGADO">PAGADO</option>
-                          <option value="ENVIADO">ENVIADO</option>
-                          <option value="CANCELADO">CANCELADO</option>
-                        </select>
-                        <button className="btn btn-primary btn-icon-split mt-1" type="submit" >
-                          <span className="icon ">
-                            <i className="fas fa-check"></i>
-                          </span>
-                          <span className="text">Actualizar</span>
-                        </button>
-                      </form>
-=======
                       {item.user.firstname} {item.user.lastname}
->>>>>>> dd9c31fed43e1955d16dd97bf378e1806a43f940
                     </td>
                     <td>{item.user.email}</td>
                     <td>{item.user.phone}</td>
@@ -129,13 +101,8 @@ function Orders() {
                       {
                         <ul key={item.id}>
                           {item.products.map((product) => (
-<<<<<<< HEAD
-                            <li key={product.slug}>
-                              {product.title} {product.quantity} {product.price}
-=======
                             <li key={product.id}>
                               {product.title} {product.quantity}
->>>>>>> dd9c31fed43e1955d16dd97bf378e1806a43f940
                             </li>
                           ))}
                         </ul>
@@ -175,8 +142,4 @@ function Orders() {
   );
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> dd9c31fed43e1955d16dd97bf378e1806a43f940
 export default Orders;
