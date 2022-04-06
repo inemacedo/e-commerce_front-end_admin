@@ -75,7 +75,6 @@ function Orders() {
                   <th>Cliente</th>
                   <th>E-mail</th>
                   <th>Teléfono</th>
-
                   <th>Dirección</th>
                   <th>Productos</th>
                   <th>Precio Total (U$D) </th>
@@ -89,7 +88,6 @@ function Orders() {
                 {orders.map((item) => (
                   <tr key={item.id}>
                     <td>{item.id}</td>
-                    <td>{item.user.firstname + " " + item.user.lastname}</td>
                     <td>
                       {item.user.firstname} {item.user.lastname}
                     </td>
@@ -113,10 +111,10 @@ function Orders() {
                     <td>
                       <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="d-flex flex-row"
-                        action=""
                       >
-                        <select {...register("status")}>
+                        <select {...register("status")}
+                          className="form-control"
+                          >
                           <option value="RECIBIDO">RECIBIDO</option>
                           <option value="ERROR">ERROR</option>
                           <option value="PAGADO">PAGADO</option>
@@ -124,11 +122,15 @@ function Orders() {
                           <option value="CANCELADO">CANCELADO</option>
                         </select>
 
-                        {
-                          <button type="submit">
-                            <AiOutlineCheckCircle color="blue" size={32} />
-                          </button>
-                        }
+                        <button className="btn btn-primary btn-icon-split mt-1" type="submit" >
+                          <span className="icon">
+                            <i className="fas fa-check"></i>
+                          </span>
+                          <span className="text">Actualizar</span>
+                        </button>
+
+
+
                       </form>
                     </td>
                   </tr>
