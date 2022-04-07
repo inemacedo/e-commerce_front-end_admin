@@ -121,7 +121,9 @@ function Categories() {
                     <td>{format(parseISO(item.createdAt), "PP")}</td>
                     <td>
                       <div className="d-flex">
-                        <EditButton />
+                        <Link to={`/categorias/editar/${item.id}`}>
+                          <EditButton />
+                        </Link>
                         <DeleteButton onClick={() => handleDelete(item.id)} />
                       </div>
                     </td>

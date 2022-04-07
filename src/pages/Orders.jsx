@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useForm, useFormState } from "react-hook-form";
+
 import { useSelector } from "react-redux";
 import { Routes, Route, Link, Navigate, useParams } from "react-router-dom";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+
+import { format, parseISO } from "date-fns";
 
 async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
@@ -18,22 +19,10 @@ async function fetchData({ url, method, token, body }) {
 }
 
 function Orders() {
-  const { register, handleSubmit } = useForm({
-    mode: "onSubmit",
-    reValidateMode: "onChange",
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: "firstError",
-    shouldFocusError: true,
-    shouldUnregister: false,
-    shouldUseNativeValidation: true,
-    delayError: undefined,
-  });
-
   const user = useSelector((state) => state.user);
   const [orders, setOrders] = useState([]);
-  const [order, setOrder] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState("");
+
   useEffect(() => {
     const getOrders = async () => {
       const data = await fetchData({
@@ -46,15 +35,13 @@ function Orders() {
     getOrders();
   }, []);
 
-  const onSubmit = async (data) => {
-    console.log(orders);
+  const onSubmit = async (id) => {
     const response = await fetchData({
-      url: process.env.REACT_APP_API_URL + "/orders/" + data.orderId,
+      url: process.env.REACT_APP_API_URL + "/orders/" + id,
       method: "PATCH",
       token: user.token,
-      body: data,
+      body: { status: selectedStatus },
     });
-    console.log(data);
     console.log(response);
   };
   // <!-- Page Heading -->
@@ -90,6 +77,7 @@ function Orders() {
                   <th>Productos</th>
                   <th>Precio Total (U$D) </th>
                   <th>Forma de pago</th>
+                  <th>Fecha de emisión</th>
                   <th>Estado</th>
                 </tr>
               </thead>
@@ -108,7 +96,7 @@ function Orders() {
                     <td>{item.address}</td>
                     <td>
                       {
-                        <ul key={item.id}>
+                        <ul className="product-description" key={item.id}>
                           {item.products.map((product) => (
                             <li key={product.id}>
                               {product.title} {product.quantity}
@@ -119,38 +107,30 @@ function Orders() {
                     </td>
                     <td>{item.totalPrice}</td>
                     <td>{item.paymentMethod}</td>
+                    <td>{format(parseISO(item.createdAt), "PP")}</td>
                     <td>
-                      <p>{item.status}</p>
-                      {item.status && (
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                          <select
-                            {...register("status")}
-                            defaultValue={item.status}
-                          >
-                            <option value="RECIBIDO">RECIBIDO</option>
-                            <option value="ERROR">ERROR</option>
-                            <option value="PAGADO">PAGADO</option>
-                            <option value="ENVIADO">ENVIADO</option>
-                            <option value="CANCELADO">CANCELADO</option>
-                          </select>
+                      <select
+                        onChange={(ev) => setSelectedStatus(ev.target.value)}
+                        defaultValue={item.status}
+                      >
+                        <option value="RECIBIDO">RECIBIDO</option>
+                        <option value="ERROR">ERROR</option>
+                        <option value="PAGADO">PAGADO</option>
+                        <option value="ENVIADO">ENVIADO</option>
+                        <option value="CANCELADO">CANCELADO</option>
+                      </select>
 
-                          <button
-                            className="btn btn-primary btn-icon-split mt-1"
-                            type="submit"
-                          >
-                            <span className="icon">
-                              <i className="fas fa-check"></i>
-                            </span>
-                            <input
-                              {...register("orderId")}
-                              className="d-none"
-                              defaultValue={item.id}
-                              type="text"
-                            />
-                            <span className="text">Actualizar</span>
-                          </button>
-                        </form>
-                      )}
+                      <button
+                        onClick={() => onSubmit(item.id)}
+                        className="btn btn-primary btn-icon-split mt-1"
+                        type="button"
+                      >
+                        <span className="icon">
+                          <i className="fas fa-check"></i>
+                        </span>
+
+                        <span className="text">Actualizar</span>
+                      </button>
                     </td>
                   </tr>
                 ))}

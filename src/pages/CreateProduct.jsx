@@ -2,20 +2,21 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import "../css/index.css";
+import axios from "axios";
 
-async function fetchData({ url, method, token, body }) {
+/* async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
     method: method,
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
       Authorization: "Bearer " + token,
     },
-    body: JSON.stringify(body),
+    body: body,
   });
   const data = await response.json();
   return data;
 }
-
+ */
 function CreateProduct() {
   const user = useSelector((state) => state.user);
   const {
@@ -25,12 +26,17 @@ function CreateProduct() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    await fetchData({
+  const onSubmit = async (ev) => {
+    ev.preventDefault();
+    const formData = new FormData(ev.target);
+    await axios({
       url: process.env.REACT_APP_API_URL + "/products",
       method: "POST",
-      token: user.token,
-      body: data,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + user.token,
+      },
+      data: formData,
     });
   }; // your form submit function which will invoke after successful validation
 
@@ -49,7 +55,10 @@ function CreateProduct() {
           <h6 className="m-0 font-weight-bold text-primary">Detalles</h6>
         </div>
         <div className="card-body">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form
+            encType="multipart/form-data"
+            onSubmit={(ev) => handleSubmit(onSubmit(ev))}
+          >
             <div className="row">
               <div className="col-md-12 col-lg-6">
                 <label className="mt-2 mb-0" htmlFor="">

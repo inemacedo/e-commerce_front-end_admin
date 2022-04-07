@@ -24,12 +24,11 @@ function EditAdmin() {
   const {
     register,
     handleSubmit,
-    watch,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
     reValidateMode: "onChange",
-    defaultValues: {},
     resolver: undefined,
     context: undefined,
     criteriaMode: "firstError",
@@ -46,8 +45,11 @@ function EditAdmin() {
         method: "GET",
         token: user.token,
       });
-      console.log(data);
+
       setProduct(data);
+      for (const key in data) {
+        setValue(key, data[key]);
+      }
     };
     getAdmin();
   }, []);
@@ -59,7 +61,6 @@ function EditAdmin() {
       token: user.token,
       body: data,
     });
-    console.log(data);
   };
   // your form submit function which will invoke after successful validation
   //   console.log(watch("title"));
@@ -225,7 +226,7 @@ function EditAdmin() {
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
-                {/* <label className="mt-2 mb-0" htmlFor="">
+                <label className="mt-2 mb-0" htmlFor="">
                   Imagen Principal
                 </label>
                 <input
@@ -243,12 +244,13 @@ function EditAdmin() {
                 />
                 <label className="mt-2 mb-0" htmlFor="">
                   Imagen Medidas
-                </label> */}
-                {/* <input
+                </label>{" "}
+                */}
+                <input
                   className="form-control form-control-lg input-file"
                   type="file"
                   {...register("imagemeasures")}
-                /> */}
+                />
               </div>
             </div>
             <button
