@@ -60,7 +60,7 @@ function Categories() {
         <div className="toast-delete d-flex justify-content-center fixed-top">
           <ToastContainer
             style={{ transition: "all .15s" }}
-            className={`${show ? "opacity-1" : "opacity-0"} bg-white m-2 p-0`}
+            className={`${show ? "opacity-1" : "opacity-0"} bg-white rounded border border-danger m-2 p-0`}
             position="top-end"
           >
             <Toast

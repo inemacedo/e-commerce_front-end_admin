@@ -53,10 +53,10 @@ function Users() {
       <div className="d-flex align-items-start justify-content-between my-4">
         <h1 className="h3 mb-2 text-gray-800">Usuarios</h1>
         {/* <!-- DataTales Example --> */}
-        <div className="toast-delete d-flex justify-content-center">
+        <div className="toast-delete d-flex justify-content-center fixed-top">
           <ToastContainer
             style={{ transition: "all .15s" }}
-            className={`${show ? "opacity-1" : "opacity-0"} bg-white m-2 p-0`}
+            className={`${show ? "opacity-1" : "opacity-0"} bg-white rounded border border-danger m-2 p-0`}
             position="top-end"
           >
             <Toast
