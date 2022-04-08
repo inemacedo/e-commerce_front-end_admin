@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import DeleteButton from "../components/DeleteButton";
 import EditButton from "../components/EditButton";
 import { format, parseISO } from "date-fns";
-import { Toast } from "react-bootstrap";
-import { ToastContainer } from "react-bootstrap";
+import { Spinner, Toast, ToastContainer } from "react-bootstrap";
 import { TiDeleteOutline } from "react-icons/ti";
+// import { , ProgressBar } from "react-bootstrap";
+
 
 async function fetchData({ url, method, body, token }) {
   const response = await fetch(url, {
@@ -85,10 +86,17 @@ function Products() {
 
       {/* <!-- DataTales Example --> */}
       <div className="card shadow mb-4">
+
+
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
             Tabla de Productos
           </h6>
+          {products.length === 0 && <div className="d-flex justify-content-center " >
+            <Spinner animation="border" role="status" variant={"primary"}>
+              <span className="d-none">Loading...</span>
+            </Spinner>
+          </div>}
         </div>
         <div className="card-body">
           <div className="table-responsive">
@@ -110,7 +118,7 @@ function Products() {
                   <th>Acciones</th>
                 </tr>
               </thead>
-              <tfoot>
+              {products.length >= 10 && <tfoot>
                 <tr>
                   <th>Id</th>
                   <th>Nombre</th>
@@ -121,7 +129,7 @@ function Products() {
                   <th>Fecha de creación</th>
                   <th>Acciones</th>
                 </tr>
-              </tfoot>
+              </tfoot>}
               <tbody>
                 {products.map((item) => (
                   <tr key={item.id}>
