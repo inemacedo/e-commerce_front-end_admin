@@ -61,13 +61,12 @@ function Admins() {
         <div className="toast-delete d-flex justify-content-center fixed-top">
           <ToastContainer
             style={{ transition: "all .15s" }}
-            className={`${
-              showToast.show ? "opacity-1" : "opacity-0"
-            } bg-dark rounded mt-3 p-0`}
+            className={`${showToast.show ? "opacity-1" : "opacity-0"
+              } bg-white rounded border border-danger m-2 p-0`}
             position="top-end"
           >
             <Toast
-              className="bg-dark rounded"
+              className=""
               onClose={() =>
                 setShowToast({ show: false, info: showToast.info })
               }
@@ -75,7 +74,7 @@ function Admins() {
               delay={5000}
               autohide
             >
-              <Toast.Body className="text-light">
+              <Toast.Body className="text-dark">
                 <TiDeleteOutline color="red" size="18" />
                 Se eliminó {showToast.info} correctamente
               </Toast.Body>

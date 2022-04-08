@@ -39,7 +39,7 @@ function CreateCategory() {
       if (response.status) {
         setShowToast(true);
       }
-    } catch (error) {}
+    } catch (error) { }
   }; // your form submit function which will invoke after successful validation
 
   return (
@@ -47,19 +47,18 @@ function CreateCategory() {
       <div className="toast-delete d-flex justify-content-center fixed-top">
         <ToastContainer
           style={{ transition: "all .15s" }}
-          className={`${
-            showToast.show ? "opacity-1" : "opacity-0"
-          } bg-dark rounded mt-3 p-0`}
+          className={`${showToast.show ? "opacity-1" : "opacity-0"
+            } bg-white rounded border border-primary m-2 p-0`}
           position="top-end"
         >
           <Toast
-            className="bg-dark rounded"
+            className=""
             onClose={() => setShowToast(false)}
             show={showToast}
             delay={5000}
             autohide
           >
-            <Toast.Body className="text-light">
+            <Toast.Body className="text-dark">
               Se ha creado una categoría correctamente
             </Toast.Body>
           </Toast>
