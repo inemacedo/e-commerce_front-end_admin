@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/index.css";
 import axios from "axios";
+import { useState } from "react";
 
 /* async function fetchData({ url, method, token, body }) {
   const response = await fetch(url, {
@@ -19,6 +20,10 @@ import axios from "axios";
  */
 function CreateProduct() {
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  const [disabled, setDisabled] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -28,8 +33,9 @@ function CreateProduct() {
 
   const onSubmit = async (ev) => {
     ev.preventDefault();
+    setDisabled(true);
     const formData = new FormData(ev.target);
-    await axios({
+    const data = await axios({
       url: process.env.REACT_APP_API_URL + "/products",
       method: "POST",
       headers: {
@@ -38,6 +44,12 @@ function CreateProduct() {
       },
       data: formData,
     });
+
+    console.log(data);
+    if (data.status === 200) {
+      navigate("/productos");
+    }
+
   }; // your form submit function which will invoke after successful validation
 
   // console.log(watch("featured", "categoryId")); // you can watch individual input by pass the name of the input
@@ -193,6 +205,7 @@ function CreateProduct() {
             <button
               className="btn btn-primary btn-icon-split mt-4"
               type="submit"
+              disabled={disabled}
             >
               <span className="icon text-white-50">
                 <i className="fas fa-check"></i>

@@ -61,15 +61,17 @@ function Login() {
                     </div>
                     <form className="user" onSubmit={handleSubmit(onSubmit)} >
                       <div className="form-group">
-                        <input type="email" className={`form-control form-control-user ${showError?"border-danger":""}`}
+                        <input type="email" className={`form-control form-control-user ${showError ? "border-danger" : ""}`}
                           id="inputEmail" aria-describedby="emailHelp"
                           placeholder="Enter Email Address..."
-                          defaultValue="" {...register("email", { required: true })} />
+                          defaultValue="admin@hackhome.com"
+                          {...register("email", { required: true })} />
                       </div>
                       <div className="form-group">
-                        <input type="password" className={`form-control form-control-user ${showError?"border-danger":""}`}
+                        <input type="password" className={`form-control form-control-user ${showError ? "border-danger" : ""}`}
                           id="inputPassword" placeholder="Password"
-                          defaultValue="" {...register("password", { required: true })} />
+                          defaultValue="admin1234"
+                          {...register("password", { required: true })} />
                       </div>
                       <div className="form-group">
                         <div className="custom-control custom-checkbox small">
