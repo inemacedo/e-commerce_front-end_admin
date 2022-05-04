@@ -2,7 +2,6 @@ import "./App.css";
 import "./css/sb-admin-2.min.css";
 import "./vendor/fontawesome-free/css/all.min.css";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import Home from "./pages/Home";
@@ -13,7 +12,6 @@ import Products from "./pages/Products";
 import Profile from "./pages/Profile";
 import SideBar from "./components/SideBar";
 import TopBar from "./components/TopBar";
-import InfinityScroll from "./components/utils/InfinityScroll";
 import Page404 from "./pages/Page404";
 import CreateProduct from "./pages/CreateProduct";
 import CreateCategory from "./pages/CreateCategory";
@@ -22,10 +20,10 @@ import EditAdmin from "./pages/EditAdmin";
 import EditProduct from "./pages/EditProduct";
 import Orders from "./pages/Orders";
 import EditCategory from "./pages/EditCategory";
+import ScrollToTop from "./components/utils/ScrollToTop";
 
 function App() {
   const user = useSelector((state) => state.user);
-  const [onTop, setOnTop] = useState(true);
 
   return !user.token ? (
     <Navigate to="/login" />
@@ -53,7 +51,6 @@ function App() {
             <Route path="*" element={<Page404 />} />
           </Routes>
 
-          <InfinityScroll action={setOnTop} />
         </div>
 
         {/* <!-- Footer --> */}
@@ -64,22 +61,9 @@ function App() {
             </div>
           </div>
         </footer>
-        {/* <!-- End of Footer --> */}
-      </div>
 
-      {/* <!-- Scroll to Top Button--> */}
-      <button
-        className="scroll-to-top rounded border-0"
-        onClick={() => {
-          window.scrollTo(0, 0);
-          setTimeout(() => {
-            setOnTop(true);
-          }, 1000);
-        }}
-        style={{ display: onTop ? "none" : "inline" }}
-      >
-        <i className="fas fa-angle-up"></i>
-      </button>
+      </div>
+      <ScrollToTop />
     </div>
   );
 }

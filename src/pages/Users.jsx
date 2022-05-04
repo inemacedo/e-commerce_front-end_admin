@@ -20,6 +20,7 @@ async function fetchData({ url, method, token }) {
 
 function Users() {
   const [users, setUsers] = useState([]);
+  const store = useSelector((state) => state);
   const user = useSelector((state) => state.user);
 
   const [show, setShow] = useState(false);
@@ -109,7 +110,7 @@ function Users() {
                 </tr>
               </tfoot>
               <tbody>
-                {users.map((user) => (
+                {users && users[0] && users.map((user) => (
                   <tr key={user.id}>
                     <td>{user.id}</td>
                     <td>{user.firstname}</td>

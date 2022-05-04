@@ -71,9 +71,9 @@ function Orders() {
                 <tr>
                   <th>Id</th>
                   <th>Cliente</th>
-                  <th>E-mail</th>
-                  <th>Teléfono</th>
-                  <th>Dirección</th>
+                  <th className="d-none d-xxl-table-cell" >E-mail</th>
+                  <th className="d-none d-xxl-table-cell" >Teléfono</th>
+                  <th className="d-none d-xxl-table-cell" >Dirección</th>
                   <th>Productos</th>
                   <th>Precio Total (U$D) </th>
                   <th>Forma de pago</th>
@@ -88,17 +88,20 @@ function Orders() {
                   <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>
-                      {item.user.firstname} {item.user.lastname}
+                      <p>Nombre: {item.user.firstname} {item.user.lastname}</p>
+                      <p className="d-xxl-none" >E-mail: {item.user.email}</p>
+                      <p className="d-xxl-none" >Teléfono: {item.user.phone}</p>
+                      <p className="d-xxl-none" >Dirección: {item.user.address}</p>
                     </td>
-                    <td>{item.user.email}</td>
-                    <td>{item.user.phone}</td>
+                    <td className="d-none d-xxl-table-cell" >{item.user.email}</td>
+                    <td className="d-none d-xxl-table-cell" >{item.user.phone}</td>
 
-                    <td>{item.address}</td>
-                    <td>
+                    <td className="d-none d-xxl-table-cell" >{item.address}</td>
+                    <td style={{ paddingLeft: 0 }} >
                       {
                         <ul className="product-description" key={item.id}>
                           {item.products.map((product) => (
-                            <li key={product.id}>
+                            <li key={product.slug}>
                               {product.title} {product.quantity}
                             </li>
                           ))}
@@ -109,28 +112,30 @@ function Orders() {
                     <td>{item.paymentMethod}</td>
                     <td>{format(parseISO(item.createdAt), "PP")}</td>
                     <td>
-                      <select
-                        onChange={(ev) => setSelectedStatus(ev.target.value)}
-                        defaultValue={item.status}
-                      >
-                        <option value="RECIBIDO">RECIBIDO</option>
-                        <option value="ERROR">ERROR</option>
-                        <option value="PAGADO">PAGADO</option>
-                        <option value="ENVIADO">ENVIADO</option>
-                        <option value="CANCELADO">CANCELADO</option>
-                      </select>
+                      <div className="d-flex flex-column align-items-start" >
+                        <select
+                          className="flex-grow-1 w-100"
+                          onChange={(ev) => setSelectedStatus(ev.target.value)}
+                          defaultValue={item.status}
+                        >
+                          <option value="RECIBIDO">RECIBIDO</option>
+                          <option value="ERROR">ERROR</option>
+                          <option value="PAGADO">PAGADO</option>
+                          <option value="ENVIADO">ENVIADO</option>
+                          <option value="CANCELADO">CANCELADO</option>
+                        </select>
 
-                      <button
-                        onClick={() => onSubmit(item.id)}
-                        className="btn btn-primary btn-icon-split mt-1"
-                        type="button"
-                      >
-                        <span className="icon">
-                          <i className="fas fa-check"></i>
-                        </span>
-
-                        <span className="text">Actualizar</span>
-                      </button>
+                        <button
+                          onClick={() => onSubmit(item.id)}
+                          className="btn btn-primary btn-icon-split mt-1"
+                          type="button"
+                        >
+                          <span className="icon">
+                            <i className="fas fa-check"></i>
+                          </span>
+                          <span className="text">Actualizar</span>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

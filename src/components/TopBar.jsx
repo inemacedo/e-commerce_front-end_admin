@@ -2,6 +2,17 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
+async function fetchData({ url, method }) {
+  const response = await fetch(url, {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  return { status: response.status, data };
+}
+
 function TopBar() {
   const params = useParams();
   const dispatch = useDispatch();
@@ -15,6 +26,22 @@ function TopBar() {
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
   };
+
+  const resetDB = async () => {
+    await fetch(process.env.REACT_APP_API_URL + `/db/reset`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        reset: true
+      })
+    });
+    console.log(JSON.stringify(
+      { reset: true }
+    ));
+    handleLogout();
+  }
 
   // <!------ Topbar Navbar*/}
 
@@ -271,27 +298,37 @@ function TopBar() {
           </button>
           {/*Dropdown - User Information*/}
           <div
-            className={`dropdown-menu dropdown-menu-right shadow animated--grow-in ${
-              showProfileMenu ? "show" : ""
-            }`}
+            className={`dropdown-menu dropdown-menu-right shadow animated--grow-in ${showProfileMenu ? "show" : ""
+              }`}
             aria-labelledby="userDropdown"
           >
             <Link className="dropdown-item" to="/profile">
               <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-              Profile
+              Perfil
             </Link>
-            <Link className="dropdown-item" to="/profile">
+            <button
+              className="dropdown-item"
+              onClick={() => setShowModal({
+                title: "Ready to Reset DataBase?",
+                description: "Select 'Reset DataBase' below if you are ready to end your current session.",
+                function: "Reset DataBase"
+              })}
+            >
               <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-              Settings
-            </Link>
-            <Link className="dropdown-item" to="/profile">
+              Resetear Base de Datos
+            </button>
+            <Link className="dropdown-item" to="/">
               <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-              Activity Log
+              Registros
             </Link>
             <div className="dropdown-divider"></div>
             <button
               className="dropdown-item"
-              onClick={() => setShowModal(true)}
+              onClick={() => setShowModal({
+                title: "Ready to Leave?",
+                description: "Select 'Logout' below if you are ready to end your current session.",
+                function: "Logout"
+              })}
             >
               <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
               Logout
@@ -310,32 +347,19 @@ function TopBar() {
         aria-hidden="true"
       >
         <div
-          className={`modal-dialog opacity-0 ${
-            showModal ? "opacity-1-delay" : ""
-          }`}
+          className={`modal-dialog`}
           role="document"
         >
           <div
-            className={`modal-content opacity-0 ${
-              showModal ? "opacity-1-delay" : ""
-            }`}
+            className={`modal-content`}
           >
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Ready to Leave?
+                {showModal.title}
               </h5>
-              <button
-                className="close"
-                type="button"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
             </div>
             <div className="modal-body">
-              Select "Logout" below if you are ready to end your current
-              session.
+              {showModal.description}
             </div>
             <div className="modal-footer">
               <button
@@ -345,14 +369,14 @@ function TopBar() {
               >
                 Cancel
               </button>
-              <button className="btn btn-primary" onClick={handleLogout}>
-                Logout
+              <button className="btn btn-primary" onClick={() => showModal.function === "Logout" ? handleLogout() : resetDB()}>
+                {showModal.function}
               </button>
             </div>
           </div>
         </div>
       </div>
-      {showModal && <div class="modal-backdrop fade show"></div>}
+      {showModal && <div className="modal-backdrop fade show"></div>}
     </nav>
   );
 }
