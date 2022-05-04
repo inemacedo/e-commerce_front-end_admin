@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import ContentRow from "../components/ContentRow";
-import Row2 from "../components/Row2";
+import ChartRow from "../components/ChartRow";
 import Row3 from "../components/Row3";
 import { Link } from "react-router-dom";
 import { BsDownload } from "react-icons/bs";
@@ -21,7 +21,7 @@ function Home() {
       {/* <!-- Content Row --> */}
       <div className="row">
         <ContentRow />
-        <Row2 />
+        <ChartRow />
       </div>
       <Row3 />
     </div>
